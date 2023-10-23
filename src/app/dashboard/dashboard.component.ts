@@ -93,6 +93,9 @@ export class DashboardComponent {
   toLogin() {
     this.router.navigate(['']);
   }
+  goToProveedores() {
+    this.router.navigate(['/proveedores']);
+  }
 
   openDialog() {
     console.log("Opening dialog...");
