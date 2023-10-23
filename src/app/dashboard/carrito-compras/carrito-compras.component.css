@@ -1,0 +1,14 @@
+.dialogCarrito {
+  width: 500px; /* Ancho personalizado */
+  height: 300px; /* Alto personalizado */
+}
+
+.btnRemoveCarrito{
+    background-color: #c21717; 
+    padding: 4%;
+    border-radius: 10%; 
+    cursor: pointer;
+    margin-left: 2%;
+    
+  }
+ 

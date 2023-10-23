@@ -1,0 +1,128 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; 
+  }
+  
+  .mat-toolbar {
+    background-color: #336420;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .example-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+  }
+  
+  .vertical-drawer {
+    width: 250px;
+  }
+  
+  .mat-drawer-content {
+    flex: 1; 
+    overflow: auto; 
+    padding: 16px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    padding: 16px; 
+  }
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .user-container {
+    display: flex;
+    align-items: center;
+  }
+  .gradient-background {
+  
+    background: linear-gradient(to bottom, #258880, #477757);
+  
+  }
+  .with-background {
+    background-color: #663030; 
+  }
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  
+  }
+  
+  .user-container {
+   margin-left: 30px;
+   margin-top: 10px;
+  }
+  
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .table {
+    margin-top: 1%;
+    padding-left: 10%;
+    width:80%;
+  }
+  .buscador{
+    margin-top: 2%;
+    padding-left: 10%;
+    width: 71%;
+  }
+  .example-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .btnAddCarrito{
+    background-color: #3498db; 
+    padding: 4%;
+    border-radius: 10%; 
+    cursor: pointer;
+  }
+  .btnBuscar {
+    padding: 1%;
+    background-color: #3498db; 
+    border-radius: 10%; 
+    color: #fff;
+    margin-left: 1%;
+    cursor: pointer;   
+    width: 40px;
+    height: 40px;
+
+  }
+.btnCarrito{
+  padding: 1%;
+  background-color: #39c558; 
+  border-radius: 10%; 
+  color: #fff;
+  margin-left: 1%;
+  cursor: pointer; 
+  width: 40px;
+  height: 40px;
+}
+.example-card {
+  max-width: 400px;
+}
