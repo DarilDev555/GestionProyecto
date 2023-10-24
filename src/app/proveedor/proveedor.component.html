@@ -8,7 +8,7 @@
     <mat-icon>menu</mat-icon>
   </button>
 
-  <span>Verduleria la floresta</span>
+  <span>Verduleria la floresta 2</span>
   <span class="example-spacer"></span>
   <span class="example-fill-remaining-space"></span>
   <div class="user-container">
@@ -49,33 +49,23 @@
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="precio">
+      <ng-container matColumnDef="direccion">
         <th mat-header-cell *matHeaderCellDef>Precio</th>
-        <td mat-cell *matCellDef="let element">{{ element.precio }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="correo">
+        <th mat-header-cell *matHeaderCellDef>Precio</th>
+        <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
       </ng-container>
 
       <!-- Symbol Column -->
-      <ng-container matColumnDef="stock">
+      <ng-container matColumnDef="telefono">
         <th mat-header-cell *matHeaderCellDef>stock</th>
-        <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
       </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="descripcion">
-        <th mat-header-cell *matHeaderCellDef>descripcion</th>
-        <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="accion">
-        <th mat-header-cell *matHeaderCellDef>Acción</th>
-        <td mat-cell *matCellDef="let element">
-          <button mat-button class="btnAddCarrito">
-            <mat-icon mat-icon-lg class="addToCard">add_shopping_cart</mat-icon>
-          </button>
-        </td>
-      </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

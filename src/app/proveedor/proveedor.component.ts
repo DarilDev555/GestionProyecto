@@ -7,58 +7,47 @@ import { MatDialog } from '@angular/material/dialog';
 export interface PeriodicElement {
   name: string;
   id: number;
-  precio: number;
-  stock: number;
-  descripcion: String;
+  telefono: number;
+  correo: String;
+  direccion: String;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { id: 1, name: 'Angel Escobar', precio: 10, stock: 5, descripcion: 'Tomate rojo ' },
+  {
+    id: 1,
+    name: 'Proveedor 1',
+    telefono: 1234567890,
+    correo: 'proveedor1@example.com',
+    direccion: 'Calle 1, Ciudad 1',
+  },
   {
     id: 2,
-    name: 'Cebolla',
-    precio: 4.0026,
-    stock: 10,
-    descripcion: 'Cebolla morada ',
+    name: 'Proveedor 2',
+    telefono: 9876543210,
+    correo: 'proveedor2@example.com',
+    direccion: 'Calle 2, Ciudad 2',
   },
   {
     id: 3,
-    name: 'Cilantro',
-    precio: 6.941,
-    stock: 3,
-    descripcion: 'Fresco 10 el manojo',
+    name: 'Proveedor 3',
+    telefono: 5555555555,
+    correo: 'proveedor3@example.com',
+    direccion: 'Calle 3, Ciudad 3',
   },
   {
     id: 4,
-    name: 'Peregil',
-    precio: 9.0122,
-    stock: 20,
-    descripcion: 'Fresco 5 el manojo ',
+    name: 'Proveedor 4',
+    telefono: 9999999999,
+    correo: 'proveedor4@example.com',
+    direccion: 'Calle 4, Ciudad 4',
   },
   {
     id: 5,
-    name: 'Sandia',
-    precio: 10.811,
-    stock: 15,
-    descripcion: 'Por kilo ',
+    name: 'Proveedor 5',
+    telefono: 77777777,
+    correo: 'proveedor5@example.com',
+    direccion: 'Calle 5, Ciudad 5',
   },
-  {
-    id: 6,
-    name: 'Naranja',
-    precio: 12.0107,
-    stock: 25,
-    descripcion: 'por kilo y por bolsa',
-  },
-  { id: 7, name: 'Mango', precio: 14.0067, stock: 20, descripcion: 'manila' },
-  {
-    id: 8,
-    name: 'Coliflor',
-    precio: 15.9994,
-    stock: 20,
-    descripcion: 'chica ',
-  },
-  { id: 9, name: 'Uva', precio: 18.9984, stock: 35, descripcion: 'Morada' },
-  { id: 10, name: 'Fresa', precio: 20.1797, stock: 50, descripcion: 'Fresca' },
 ];
 
 @Component({
@@ -70,10 +59,9 @@ export class ProveedorComponent {
   displayedColumns: string[] = [
     'id',
     'name',
-    'precio',
-    'stock',
-    'descripcion',
-    'accion',
+    'telefono',
+    'correo',
+    'direccion',
   ];
   dataSource = ELEMENT_DATA;
   isDrawerOpened = false;
