@@ -19,6 +19,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { CarritoComprasComponent } from './dashboard/carrito-compras/carrito-compras.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { ProveedorComponent } from './proveedor/proveedor.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 
 
@@ -26,7 +27,7 @@ import { ProveedorComponent } from './proveedor/proveedor.component';
 @NgModule({
   declarations: [
     AppComponent,  
-    DashboardComponent, CarritoComprasComponent, ProveedorComponent,
+    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent,
   ],
   imports: [
     BrowserModule,
