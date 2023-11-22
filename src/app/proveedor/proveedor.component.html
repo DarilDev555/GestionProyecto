@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <mat-toolbar>
   <button
     mat-icon-button
@@ -7,6 +8,21 @@
   >
     <mat-icon>menu</mat-icon>
   </button>
+=======
+<form class="formBuscador">
+
+  <mat-form-field class="buscador">
+    <mat-label>Buscar</mat-label>
+    <input matInput placeholder="Código, Nombre" [(ngModel)]="buscarTexto" #searchInput name="buscarTexto" />
+  </mat-form-field>
+  <button mat-button class="btnBuscar" type="button" proveedorBuscar (click)="proveedorBuscar(); limpiarInput()">
+    <mat-icon mat-icon-lg id="icon">search</mat-icon>
+  </button>
+  <button mat-button class="btnAgregarProveedor" (click)="proveedorAdd(); limpiarInput()">
+    <mat-icon mat-icon-lg id="icon">add_circle</mat-icon>
+  </button>
+</form>
+>>>>>>> Stashed changes
 
   <span>Verduleria la floresta 2</span>
   <span class="example-spacer"></span>
@@ -37,11 +53,19 @@
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
+<<<<<<< Updated upstream
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
+=======
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+>>>>>>> Stashed changes
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
@@ -49,6 +73,7 @@
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
+<<<<<<< Updated upstream
       <ng-container matColumnDef="direccion">
         <th mat-header-cell *matHeaderCellDef>Precio</th>
         <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
@@ -110,3 +135,47 @@
 </mat-drawer-container>
 
 <!--<app-lista-peliculas></app-lista-peliculas>-->
+=======
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef>Direccion</th>
+      <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef>Correo</th>
+      <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef>Telefono</th>
+      <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef>Acción</th>
+      <td mat-cell *matCellDef="let element">
+
+        <button mat-button class="btnDeleteProveedor" (click)="proveedorDelete(element)">
+          <mat-icon on mat-icon-lg class="addToCard">
+          delete
+          </mat-icon>
+        </button>
+      
+        <button mat-button class="btnEditProveedor" (click)="proveedorEdit()">
+          <mat-icon on mat-icon-lg class="addToCard">
+            border_color
+          </mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+>>>>>>> Stashed changes

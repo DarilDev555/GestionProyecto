@@ -45,7 +45,8 @@
   .gradient-background {
   
     background: linear-gradient(to bottom, #258880, #477757);
-  
+    height: 100vh;
+
   }
   .with-background {
     background-color: #663030; 
@@ -96,23 +97,48 @@
     align-items: center;
   }
   
-  .btnAddCarrito{
-    background-color: #3498db; 
+  .btnDeleteProveedor{
+    background-color: #db4d34; 
     padding: 4%;
+    margin: 4%;
     border-radius: 10%; 
     cursor: pointer;
+    align-items: center;
   }
+
+  .btnEditProveedor{
+    background-color: #34db55; 
+    padding: 4%;
+    margin: 4%;
+    border-radius: 10%; 
+    cursor: pointer;
+    align-items: center;
+
+  }
+
+  .btnAgregarProveedor{
+    background-color: #0009bb; 
+    color: #fff;  
+    padding: 1%;
+    margin: 0.4%;
+    border-radius: 10%; 
+    cursor: pointer;
+    align-items: center;
+
+  }
+
   .btnBuscar {
     padding: 1%;
     background-color: #3498db; 
     border-radius: 10%; 
     color: #fff;
-    margin-left: 1%;
+    margin: 0.4%;
     cursor: pointer;   
     width: 40px;
     height: 40px;
 
   }
+
 .btnCarrito{
   padding: 1%;
   background-color: #39c558; 

@@ -80,6 +80,7 @@
         </td>
       </ng-container>
 
+<<<<<<< Updated upstream
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
@@ -91,6 +92,25 @@
   >
     <div class="user-container">
       <p>{{ userName }}</p>
+=======
+        <!-- Acción Column -->
+        <ng-container matColumnDef="accion">
+          <th mat-header-cell *matHeaderCellDef>Acción</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+
+            <button mat-button class="btnAddCarrito" (click)="listaCarrito(element.id,element.nombre,element.precio,element.stock,element.descripcion,cantidadInputs[i]); resetCantidadInput(i)">
+              <mat-icon mat-icon-lg class="addToCard">
+                add_shopping_cart
+              </mat-icon>
+            </button>
+          
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+>>>>>>> Stashed changes
     </div>
     <div class="user-container">
       <h1>{{ name }}</h1>
