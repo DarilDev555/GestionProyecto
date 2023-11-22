@@ -20,14 +20,15 @@ import { CarritoComprasComponent } from './dashboard/carrito-compras/carrito-com
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { ProveedorComponent } from './proveedor/proveedor.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-
-
+import { ConfirmacionVDialogComponent } from './dashboard/confirmacion-v-dialog/confirmacion-v-dialog.component';
+import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,  
-    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent,
+    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, 
   ],
   imports: [
     BrowserModule,
@@ -43,8 +44,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
     MatCardModule,
     MatDialogModule,
     MatDividerModule,
-  
-
+    FormsModule,  
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],

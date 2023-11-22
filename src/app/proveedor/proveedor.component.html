@@ -1,112 +1,47 @@
-<mat-toolbar>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with menu icon"
-    (click)="toggleDrawer()"
-  >
-    <mat-icon>menu</mat-icon>
+<form class="formBuscador">
+  <mat-form-field class="buscador">
+    <mat-label>Buscar</mat-label>
+    <input matInput placeholder="Código, Nombre" />
+  </mat-form-field>
+  <button mat-button class="btnBuscar" type="button">
+    <mat-icon mat-icon-lg id="icon">search</mat-icon>
   </button>
+</form>
 
-  <span>Verduleria la floresta 2</span>
-  <span class="example-spacer"></span>
-  <span class="example-fill-remaining-space"></span>
-  <div class="user-container">
-    <h1>{{ userName }}</h1>
-    <div class="user-container">
-      <div class="user-avatar">
-        <img [src]="imag" routerLink="login" alt="Imagen de perfil" />
-      </div>
-    </div>
-  </div>
-</mat-toolbar>
-
-<mat-drawer-container>
-  <form class="formBuscador">
-    <mat-form-field class="buscador">
-      <mat-label>Buscar</mat-label>
-      <input matInput placeholder="Código, Nombre" />
-    </mat-form-field>
-    <button mat-button class="btnBuscar" type="button">
-      <mat-icon mat-icon-lg id="icon">search</mat-icon>
-    </button>
-  </form>
-
-  <div class="table">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!--- Note that these columns can be defined in any order.
+<div class="table">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-      </ng-container>
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-      </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
 
-      <ng-container matColumnDef="direccion">
-        <th mat-header-cell *matHeaderCellDef>Precio</th>
-        <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
-      </ng-container>
+    <ng-container matColumnDef="direccion">
+      <th mat-header-cell *matHeaderCellDef>Precio</th>
+      <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
+    </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="correo">
-        <th mat-header-cell *matHeaderCellDef>Precio</th>
-        <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
-      </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="correo">
+      <th mat-header-cell *matHeaderCellDef>Precio</th>
+      <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
+    </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="telefono">
-        <th mat-header-cell *matHeaderCellDef>stock</th>
-        <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
-      </ng-container>
-
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
-  <mat-drawer
-    mode="side"
-    [opened]="isDrawerOpened"
-    class="vertical-drawer with-background"
-  >
-    <div class="user-container">
-      <p>{{ userName }}</p>
-    </div>
-    <div class="user-container">
-      <h1>{{ name }}</h1>
-    </div>
-    <div class="user-container">
-      <div class="user-avatar">
-        <img [src]="imag" alt="Imagen de perfil" />
-      </div>
-    </div>
-
-    <div class="button-container">
-      <button mat-button (click)="toggleDrawer()">
-        <mat-icon>home</mat-icon>
-        Home
-      </button>
-      <button mat-button (click)="toggleDrawer()">
-        <mat-icon>event_seat</mat-icon>
-        Proveedor CRUD
-      </button>
-      <button mat-button (click)="toggleDrawer()">
-        <mat-icon>account_box</mat-icon>
-        Producto CRUD
-      </button>
-      <button mat-button (click)="toLogin()">
-        <mat-icon>exit_to_app</mat-icon>
-        Salir
-      </button>
-    </div>
-  </mat-drawer>
-</mat-drawer-container>
-
-<!--<app-lista-peliculas></app-lista-peliculas>-->
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef>stock</th>
+      <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

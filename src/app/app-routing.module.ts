@@ -3,13 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import {DashboardComponent} from './dashboard/dashboard.component'
 import {ProveedorComponent} from './proveedor/proveedor.component'
 import {AppComponent} from './app.component'
+import {LoginPageComponent} from './login-page/login-page.component'
 
 
 
 const routes: Routes = [
-  {path: 'productos', component: DashboardComponent },
+  {path: 'dashboard', component: DashboardComponent },
   {path: 'proveedores', component: ProveedorComponent },
-  {path: 'inicio', component: AppComponent }
+  {path: 'login', component: LoginPageComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+
 
 ];
 

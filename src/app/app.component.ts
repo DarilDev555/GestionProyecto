@@ -12,14 +12,28 @@ export class AppComponent {
   constructor(private router: Router ){
     
   }
-
-  login() { 
-      this.router.navigate(['/productos']);
-      console.log('voy al dash')
+  name = '';
+  userName = '';
+  imag = '';
+  isDrawerOpened = false;
+  toggleDrawer() {
+    this.isDrawerOpened = !this.isDrawerOpened;
   }
-  // button to open another component
+
+
+  toLogin() {
+    this.router.navigate(['']);
+    this.toggleDrawer();
+  }
+
   goToProveedores() {
     this.router.navigate(['/proveedores']);
+    this.toggleDrawer();
+  }
+
+  toHome() {
+    this.router.navigate(['/dashboard']);
+    this.toggleDrawer();
   }
 }
 

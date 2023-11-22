@@ -1,15 +1,66 @@
- <div>
-    <router-outlet></router-outlet>
-    <app-login-page></app-login-page>
-    <div>
-      <router-outlet></router-outlet>
-      <section >
-          <div class="example-label" >Ir al Dashboard o login</div>
-          <div class="example-button-row" >
-              <button  (click)="login()" color="primary" type="submit" > Ir al Dashboard          
-              </button>  
-              <button (click)="goToProveedores()">Proveedores</button>  
-          </div>
-        </section>
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+    (click)="toggleDrawer()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span>Verduleria la floresta</span>
+  <span class="example-spacer"></span>
+  <span class="example-fill-remaining-space"></span>
+  <div class="user-container">
+    <h1>{{ userName }}</h1>
+    <div class="user-container">
+      <div class="user-avatar">
+        <img [src]="imag" routerLink="login" alt="Imagen de perfil" />
+      </div>
     </div>
   </div>
+</mat-toolbar>
+
+<mat-drawer-container>
+  <mat-drawer
+    mode="side"
+    [opened]="isDrawerOpened"
+    class="vertical-drawer with-background"
+  >
+    <div class="user-container">
+      <p>{{ userName }}</p>
+    </div>
+    <div class="user-container">
+      <h1>{{ name }}</h1>
+    </div>
+    <div class="user-container">
+      <div class="user-avatar">
+        <img [src]="imag" alt="Imagen de perfil" />
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button mat-button (click)="toHome()">
+        <mat-icon>home</mat-icon>
+        Home
+      </button>
+      <button mat-button (click)="goToProveedores()">
+        <mat-icon>event_seat</mat-icon>
+        Proveedor CRUD
+      </button>
+      <button mat-button (click)="toggleDrawer()">
+        <mat-icon>account_box</mat-icon>
+        Producto CRUD
+      </button>
+      <button mat-button (click)="toLogin()">
+        <mat-icon>exit_to_app</mat-icon>
+        Salir
+      </button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content class="gradient-background">
+    <router-outlet>
+      
+    </router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
