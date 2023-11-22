@@ -45,6 +45,7 @@
 .gradient-background {
 
   background: linear-gradient(to bottom, #258880, #477757);
+  height: 100vh;
 
 }
 .with-background {
