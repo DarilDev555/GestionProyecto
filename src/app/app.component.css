@@ -1,4 +1,4 @@
-<<<<<<< Updated upstream
+
 section {
     display: table;
   }
@@ -30,7 +30,7 @@ section {
     justify-content: center;
     width: 120px;
   }
-=======
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -79,7 +79,6 @@ section {
 
   background: linear-gradient(to bottom, #258880, #477757);
   height: 100vh;
-
 }
 .with-background {
   background-color: #663030; 
@@ -160,4 +159,3 @@ height: 40px;
 .example-card {
 max-width: 400px;
 }
->>>>>>> Stashed changes

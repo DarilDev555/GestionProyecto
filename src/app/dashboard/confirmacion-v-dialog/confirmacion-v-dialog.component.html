@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Cancelar producto</h1>
+<div mat-dialog-content>
+  <p>Código de cancelación</p>
+  <mat-form-field>
+    <mat-label>Código</mat-label>
+    <input matInput type="password" [(ngModel)]="inputCode">
+  </mat-form-field>
+  <p id="mensaje"  *ngIf="mensajeVisible" [hidden]="!mensajeVisible" >
+    Código incorrecto
+  </p>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button  (click)="onNoClick()" >Cancelar</button>
+  <button mat-button (click)="verificarCodigo()" cdkFocusInitial>Comfirmar</button>
+ 
+
+</div>

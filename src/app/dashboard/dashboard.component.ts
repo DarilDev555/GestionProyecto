@@ -1,66 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
-import { MatDialog } from '@angular/material/dialog'; 
-
-
+import { MatDialog } from '@angular/material/dialog';
+import { Producto } from '../modelos/producto';
+import { HttpClient } from '@angular/common/http';
+import { Produc } from '../modelos/produc';
 
 export interface PeriodicElement {
-  name: string;
+  nombre: string;
   id: number;
   precio: number;
   stock: number;
-  descripcion: String;
+  descripcion: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { id: 1, name: 'Tomate', precio: 10, stock: 5, descripcion: 'Tomate rojo ' },
-  {
-    id: 2,
-    name: 'Cebolla',
-    precio: 4.0026,
-    stock: 10,
-    descripcion: 'Cebolla morada ',
-  },
-  {
-    id: 3,
-    name: 'Cilantro',
-    precio: 6.941,
-    stock: 3,
-    descripcion: 'Fresco 10 el manojo',
-  },
-  {
-    id: 4,
-    name: 'Peregil',
-    precio: 9.0122,
-    stock: 20,
-    descripcion: 'Fresco 5 el manojo ',
-  },
-  {
-    id: 5,
-    name: 'Sandia',
-    precio: 10.811,
-    stock: 15,
-    descripcion: 'Por kilo ',
-  },
-  {
-    id: 6,
-    name: 'Naranja',
-    precio: 12.0107,
-    stock: 25,
-    descripcion: 'por kilo y por bolsa',
-  },
-  { id: 7, name: 'Mango', precio: 14.0067, stock: 20, descripcion: 'manila' },
-  {
-    id: 8,
-    name: 'Coliflor',
-    precio: 15.9994,
-    stock: 20,
-    descripcion: 'chica ',
-  },
-  { id: 9, name: 'Uva', precio: 18.9984, stock: 35, descripcion: 'Morada' },
-  { id: 10, name: 'Fresa', precio: 20.1797, stock: 50, descripcion: 'Fresca' },
-];
+const ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
   selector: 'app-dashboard',
@@ -70,40 +24,210 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class DashboardComponent {
   displayedColumns: string[] = [
     'id',
-    'name',
+    'nombre',
     'precio',
     'stock',
     'descripcion',
+    'cantidad',
     'accion',
   ];
-  dataSource = ELEMENT_DATA;
-  isDrawerOpened = false;
-  name = '';
-  userName = '';
-  imag = '';
-  constructor(private router: Router, public dialog: MatDialog) {}
-  toggleDrawer() {
-    this.isDrawerOpened = !this.isDrawerOpened;
-  }
-  clearUserData() {
-    this.userName = '';
-    this.imag = '';
-    this.isDrawerOpened = !this.isDrawerOpened;
-  }
-  toLogin() {
-    this.router.navigate(['']);
-  }
-  goToProveedores() {
-    this.router.navigate(['/proveedores']);
-  }
 
-  openDialog() {
-    console.log("Opening dialog...");
-    const dialogRef = this.dialog.open(CarritoComprasComponent);
-  
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+  productos: Producto[] = [];
+  producs: Produc[] = [];
+  productosTotales: Producto[] = [];
+  productosFiltrados: Producto[] = [];
+  originalData: PeriodicElement[] = ELEMENT_DATA;
+  cantidadInputs: number[] = new Array(ELEMENT_DATA.length).fill(0); // Initialize an array with default quantity values (1 for each row)
+  buscarTexto: string = '';
+
+  dataSource = ELEMENT_DATA;
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    public dialog: MatDialog
+  ) {
+    const carritoDataString = localStorage.getItem('carrito');
+
+    if (carritoDataString !== null) {
+      const carritoData = JSON.parse(carritoDataString);
+      this.productos = carritoData;
+    }
+
+    this.obtenerProductos();
+    this.productosTotales = ELEMENT_DATA.map((Produc) => {
+      return {
+        id: Produc.id,
+        nombre: Produc.nombre,
+        precio: Produc.precio,
+        stock: Produc.stock,
+        descripcion: Produc.descripcion,
+        cantidad: 0, // Puedes establecer la cantidad inicial en 0
+        total: 0, // Puedes establecer el total inicial en 0
+      };
     });
   }
 
+  listaCarrito(
+    id: number,
+    nombre: string,
+    precio: number,
+    stock: number,
+    descripcion: string,
+    cantidad: number
+  ) {
+    if (cantidad > 0) {
+      if (cantidad <= stock) {
+        const productoExistente = this.productos.find(
+          (producto) => producto.id === id
+        );
+      if (productoExistente) {
+        // Si el producto ya existe, aumentar la cantidad y actualizar el total
+        productoExistente.cantidad += cantidad; // Asegurando que cantidad sea un número
+        productoExistente.total =
+          productoExistente.cantidad * productoExistente.precio;
+      } else {
+        // Si el producto no existe en el carrito, agrégalo a la lista
+        const producto: Producto = {
+          id: id,
+          nombre: nombre,
+          precio: precio,
+          stock: stock,
+          descripcion: descripcion,
+          cantidad: cantidad, // Asegurando que cantidad sea un número
+          total: precio * cantidad,
+        };
+        this.productos.push(producto);
+        // Guarda los productos en el almacenamiento local para persistencia
+        localStorage.setItem('carrito', JSON.stringify(this.productos));
+      }
+      window.alert(`Producto agregado: ${nombre}`);
+    } else {
+      window.alert(`La cantidad deseada (${cantidad}) es mayor que el stock disponible (${stock}).`);
+    }
+  } else {
+    window.alert('No has ingresado una cantidad válida de productos.');
+  }
+}
+  openDialogCarritoCompras() {
+    console.log('Opening dialog...');
+    console.log(this.productos);
+    const dialogRef = this.dialog.open(CarritoComprasComponent, {
+      data: { productos: this.productos },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+
+      // Actualiza la lista de productos en DashboardComponent
+      if (result) {
+        this.productos = [];
+      }
+    });
+  }
+  resetCantidadInput(i: number) {
+    this.cantidadInputs[i] = 0; // Reset the input value for the row at index 'i'
+  }
+
+  buscarProducto() {
+    const buscarTexto = this.buscarTexto.trim(); // Elimina espacios en blanco alrededor
+    const id = parseInt(buscarTexto);
+
+    console.log('texto:', buscarTexto);
+    console.log('totales:', this.productosTotales);
+
+    if (!isNaN(id)) {
+      // Si la conversión a número es exitosa, busca por ID
+      const productoExistente = this.productosTotales.find(
+        (producto) => producto.id === id
+      );
+
+      if (productoExistente) {
+        this.elementDataToProducto(productoExistente);
+        console.log('Encontrado (por ID):', productoExistente);
+      } else {
+        console.log('Producto no encontrado (por ID)', productoExistente);
+      }
+    } else {
+      // Si no es un número, busca por nombre
+      const nombre = buscarTexto.toLowerCase(); // Convierte el texto de búsqueda a minúsculas
+
+      const productoExistente = this.productosTotales.find(
+        (producto) => producto.nombre.toLowerCase() === nombre
+      );
+
+      if (productoExistente) {
+        console.log('Encontrado (por nombre):', productoExistente);
+        this.elementDataToProducto(productoExistente);
+      } else {
+        console.log('Producto no encontrado (por nombre)');
+      }
+    }
+  }
+
+  elementDataToProducto(producto: Producto) {
+    // Crea una nueva matriz de un solo elemento con el producto
+    const newElementData: PeriodicElement[] = [
+      {
+        id: producto.id,
+        nombre: producto.nombre,
+        precio: producto.precio,
+        stock: producto.stock,
+        descripcion: producto.descripcion,
+      },
+    ];
+
+    // Actualiza dataSource para reflejar los cambios
+    this.dataSource = newElementData;
+    console.log('elementdata:', ELEMENT_DATA);
+    console.log('datasource:', this.dataSource);
+  }
+
+  actualizarTabla() {
+    console.log('Lista de productos de ELEMENT_DATA', ELEMENT_DATA);
+    this.dataSource = ELEMENT_DATA;
+  }
+
+  limpiarInput() {
+    this.buscarTexto = '';
+  }
+
+  obtenerProductos() {
+    this.http
+      .get<any>('http://127.0.0.1:8000/api/ProductosComplete/')
+      .subscribe(
+        (data) => {
+          this.productosTotales = [];
+
+          for (const productDataFull of data) {
+            const product: Produc = {
+              id: productDataFull.ProductoID,
+              nombre: productDataFull.Nombre,
+              descripcion: productDataFull.Descripcion,
+              precio: productDataFull.Precio,
+              stock: productDataFull.Stock,
+            };
+            this.producs.push(product);
+            this.productosTotales.push({
+              id: product.id,
+              nombre: product.nombre,
+              precio: product.precio,
+              stock: product.stock,
+              descripcion: product.descripcion,
+              cantidad: 0,
+              total: 0,
+            });
+            this.producs.push(product);
+            ELEMENT_DATA.push(product);
+          }
+
+          this.dataSource = this.productosTotales;
+          // Rest of the code to handle data
+        },
+        (error) => {
+          console.error('Error fetching data from the API:', error);
+        }
+      );
+    console.log('Lista de productos de la api', this.producs);
+  }
 }
