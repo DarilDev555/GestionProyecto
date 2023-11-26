@@ -19,6 +19,9 @@ export class ProveedorService {
     return this.http.get<Proveedor[]>(this.apiUrl);
   }
 
+  agregarProveedor(proveedor: Proveedor): Observable<Proveedor> {
+    return this.http.post<Proveedor>(this.apiUrl, proveedor);
+  }
   // Agrega métodos para agregar, eliminar, editar proveedores si es necesario
 }
 
@@ -87,9 +90,6 @@ export class ProveedorComponent {
   proveedorDelete(element: any) {
   }
 
-  proveedorAdd() {
-  }
-
   proveedorEdit() {
   }
 
@@ -149,6 +149,40 @@ export class ProveedorComponent {
 
   limpiarInput() {
     this.buscarTexto = '';
+  }
+
+
+  proveedorAdd() {
+    // Aquí podrías abrir un diálogo/modal para recopilar la información del nuevo proveedor
+    // y luego llamar al servicio para agregarlo.
+
+    const nuevoProveedor: Proveedor = {
+      id: 8,  // No incluyas el ID, ya que será asignado por la base de datos
+      name: 'Nuevo Proveedor',  // Cambia estos valores con los datos reales del nuevo proveedor
+      telefono: 9512170127,
+      correo: 'nuevo@proveedor.com',
+      direccion: 'Dirección del Nuevo Proveedor',
+    };
+
+    this.proveedorService.agregarProveedor(nuevoProveedor).subscribe(
+      (proveedorAgregado) => {
+        console.log('Proveedor agregado:', proveedorAgregado);
+        
+        // Actualizar la lista de proveedores después de agregar uno nuevo
+        this.proveedorService.obtenerProveedores().subscribe(
+          (data) => {
+            this.proveedoresTotales = data;
+            this.dataSource = this.proveedoresTotales;
+          },
+          (error) => {
+            console.error('Error al obtener proveedores desde la API:', error);
+          }
+        );
+      },
+      (error) => {
+        console.error('Error al agregar proveedor:', error);
+      }
+    );
   }
 
 
