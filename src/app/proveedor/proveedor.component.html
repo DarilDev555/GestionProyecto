@@ -21,34 +21,34 @@
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.ProveedorID }}</td>
       </ng-container>
 
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
+      <!-- Name Column -->  
+      <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.Nombre  }}</td>
       </ng-container>
 
     <ng-container matColumnDef="direccion">
       <th mat-header-cell *matHeaderCellDef>Precio</th>
 
-      <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.Direccion }}</td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="correo">
 
       <th mat-header-cell *matHeaderCellDef>Correo</th>
-      <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.CorreoElectronico }}</td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="telefono">
 
       <th mat-header-cell *matHeaderCellDef>Telefono</th>
-      <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.Telefono }}</td>
     </ng-container>
 
     <ng-container matColumnDef="accion">

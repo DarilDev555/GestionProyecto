@@ -3,53 +3,34 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog'; 
 import { Proveedor } from '../modelos/proveedor';
 
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+@Injectable({
+  providedIn: 'root',
+})
+export class ProveedorService {
+  private apiUrl = 'http://127.0.0.1:8000/api/Proveedores/';
+
+  constructor(private http: HttpClient) {}
+
+  obtenerProveedores(): Observable<Proveedor[]> {
+    return this.http.get<Proveedor[]>(this.apiUrl);
+  }
+
+  // Agrega métodos para agregar, eliminar, editar proveedores si es necesario
+}
 
 export interface PeriodicElement {
-  name: string;
   id: number;
+  name: string;
   telefono: number;
-  correo: String;
+  correo: String; 
   direccion: String;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    id: 1,
-    name: 'Proveedor 1',
-    telefono: 1234567890,
-    correo: 'proveedor1@example.com',
-    direccion: 'Calle 1, Ciudad 1',
-  },
-  {
-    id: 2,
-    name: 'Proveedor 2',
-    telefono: 9876543210,
-    correo: 'proveedor2@example.com',
-    direccion: 'Calle 2, Ciudad 2',
-  },
-  {
-    id: 3,
-    name: 'Proveedor 3',
-    telefono: 5555555555,
-    correo: 'proveedor3@example.com',
-    direccion: 'Calle 3, Ciudad 3',
-  },
-  {
-    id: 4,
-    name: 'Proveedor 4',
-    telefono: 9999999999,
-    correo: 'proveedor4@example.com',
-    direccion: 'Calle 4, Ciudad 4',
-  },
-  {
-    id: 5,
-    name: 'Proveedor 5',
-    telefono: 77777777,
-    correo: 'proveedor5@example.com',
-    direccion: 'Calle 5, Ciudad 5',
-  },
-];
+const ELEMENT_DATA: PeriodicElement[] = [];
 
 @Component({
   selector: 'proveedor',
@@ -58,42 +39,44 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ProveedorComponent {
   displayedColumns: string[] = [
-    'id',
-    'name',
-    'telefono',
-    'correo',
-    'direccion',
-    'accion',
-  ];
-  dataSource = ELEMENT_DATA;
+  'id',
+  'nombre',
+  'telefono',
+  'correo',
+  'direccion',
+  'accion'];
+
+  
+  proveedoresTotales: Proveedor[] = [];
+  proveedorSelect: Proveedor[] = [];
+  dataSource = this.proveedoresTotales;
   isDrawerOpened = false;
   name = '';
   userName = '';
   imag = '';
   buscarTexto: string = '';
-  proveedoresTotales: Proveedor[] = [];
-  proveedorSelect: Proveedor[] = [];
-  constructor(private router: Router, public dialog: MatDialog) {
 
-    this.proveedoresTotales = ELEMENT_DATA.map((element) => {
-      return {
-        id: element.id,
-        name: element.name,
-        telefono: element.telefono,
-        correo: element.correo,
-        direccion: element.direccion,
-      };
-    });
 
+  
+  constructor(private router: Router, public dialog: MatDialog, private proveedorService: ProveedorService) {
+    // Reemplaza la inicialización de this.proveedoresTotales con una llamada al servicio
+    this.proveedorService.obtenerProveedores().subscribe(
+      (data) => {
+        console.log('Datos de la API:', data);
+        this.proveedoresTotales = data;
+        this.dataSource = this.proveedoresTotales;
+      },
+      (error) => {
+        console.error('Error al obtener proveedores desde la API:', error);
+      }
+    );
   }
+  
+
   toggleDrawer() {
     this.isDrawerOpened = !this.isDrawerOpened;
   }
-  clearUserData() {
-    this.userName = '';
-    this.imag = '';
-    this.isDrawerOpened = !this.isDrawerOpened;
-  }
+ 
   toLogin() {
     this.router.navigate(['']);
   }
@@ -102,22 +85,6 @@ export class ProveedorComponent {
   }
 
   proveedorDelete(element: any) {
-    const index = this.proveedoresTotales.findIndex(
-      (proveedor: Proveedor) => proveedor.id ===element.id
-    );
-
-      this.proveedoresTotales.splice(index, 1);
-
-
-    this.dataSource = this.proveedoresTotales.map((proveedor: Proveedor) => {
-      return {
-        id: proveedor.id,
-        name: proveedor.name,
-        telefono: proveedor.telefono,
-        correo: proveedor.correo,
-        direccion: proveedor.direccion,
-      };
-    });
   }
 
   proveedorAdd() {
