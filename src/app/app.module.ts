@@ -23,6 +23,9 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { ConfirmacionVDialogComponent } from './dashboard/confirmacion-v-dialog/confirmacion-v-dialog.component';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 @NgModule({
@@ -45,8 +48,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatDividerModule,
     FormsModule,  
+    MatSelectModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

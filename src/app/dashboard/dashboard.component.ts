@@ -42,6 +42,15 @@ export class DashboardComponent {
 
   dataSource = ELEMENT_DATA;
 
+  // Pagination variables
+
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 0;
+  i: number = 1;
+  totalPages: number = 0;
+  selectedPage: number = 0;
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -54,7 +63,6 @@ export class DashboardComponent {
       this.productos = carritoData;
     }
 
-    this.obtenerProductos();
     this.productosTotales = ELEMENT_DATA.map((Produc) => {
       return {
         id: Produc.id,
@@ -66,6 +74,7 @@ export class DashboardComponent {
         total: 0, // Puedes establecer el total inicial en 0
       };
     });
+    this.obtenerProductos();
   }
 
   listaCarrito(
@@ -81,34 +90,36 @@ export class DashboardComponent {
         const productoExistente = this.productos.find(
           (producto) => producto.id === id
         );
-      if (productoExistente) {
-        // Si el producto ya existe, aumentar la cantidad y actualizar el total
-        productoExistente.cantidad += cantidad; // Asegurando que cantidad sea un número
-        productoExistente.total =
-          productoExistente.cantidad * productoExistente.precio;
+        if (productoExistente) {
+          // Si el producto ya existe, aumentar la cantidad y actualizar el total
+          productoExistente.cantidad += cantidad; // Asegurando que cantidad sea un número
+          productoExistente.total =
+            productoExistente.cantidad * productoExistente.precio;
+        } else {
+          // Si el producto no existe en el carrito, agrégalo a la lista
+          const producto: Producto = {
+            id: id,
+            nombre: nombre,
+            precio: precio,
+            stock: stock,
+            descripcion: descripcion,
+            cantidad: cantidad, // Asegurando que cantidad sea un número
+            total: precio * cantidad,
+          };
+          this.productos.push(producto);
+          // Guarda los productos en el almacenamiento local para persistencia
+          localStorage.setItem('carrito', JSON.stringify(this.productos));
+        }
+        window.alert(`Producto agregado: ${nombre}`);
       } else {
-        // Si el producto no existe en el carrito, agrégalo a la lista
-        const producto: Producto = {
-          id: id,
-          nombre: nombre,
-          precio: precio,
-          stock: stock,
-          descripcion: descripcion,
-          cantidad: cantidad, // Asegurando que cantidad sea un número
-          total: precio * cantidad,
-        };
-        this.productos.push(producto);
-        // Guarda los productos en el almacenamiento local para persistencia
-        localStorage.setItem('carrito', JSON.stringify(this.productos));
+        window.alert(
+          `La cantidad deseada (${cantidad}) es mayor que el stock disponible (${stock}).`
+        );
       }
-      window.alert(`Producto agregado: ${nombre}`);
     } else {
-      window.alert(`La cantidad deseada (${cantidad}) es mayor que el stock disponible (${stock}).`);
+      window.alert('No has ingresado una cantidad válida de productos.');
     }
-  } else {
-    window.alert('No has ingresado una cantidad válida de productos.');
   }
-}
   openDialogCarritoCompras() {
     console.log('Opening dialog...');
     console.log(this.productos);
@@ -217,17 +228,43 @@ export class DashboardComponent {
               cantidad: 0,
               total: 0,
             });
-            this.producs.push(product);
-            ELEMENT_DATA.push(product);
-          }
 
-          this.dataSource = this.productosTotales;
-          // Rest of the code to handle data
+            this.dataSource = this.productosTotales.slice(0, this.itemsPerPage);
+          }
+          this.totalItems = this.productosTotales.length;
+          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+
+          this.onPageChange({ pageIndex: this.currentPage - 1 });
         },
         (error) => {
           console.error('Error fetching data from the API:', error);
         }
       );
     console.log('Lista de productos de la api', this.producs);
+  }
+
+  onPageChange(event: any) {
+    
+
+    if (event.pageSize == undefined) {
+      console.log('item por pag seleccionada', event.pageSize);
+      this.itemsPerPage = 5;
+    }else{
+      this.itemsPerPage = event.pageSize;
+    }
+    
+
+    this.currentPage = event.pageIndex + 1;
+
+    // Obtener los productos de la página actual directamente desde this.productosTotales
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.dataSource = this.productosTotales.slice(startIndex, endIndex);
+  }
+
+  getCurrentPageProductos() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.productosTotales.slice(startIndex, endIndex);
   }
 }

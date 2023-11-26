@@ -6,7 +6,7 @@
 }
 
 .mat-toolbar {
-  background-color: #336420;
+  background-color: #4ea056; 
   padding: 8px;
   display: flex;
   align-items: center;
@@ -43,13 +43,10 @@
   align-items: center;
 }
 .gradient-background {
-
-  background: linear-gradient(to bottom, #258880, #477757);
-  height: 100vh;
-
+background-color: #fff;
 }
 .with-background {
-  background-color: #663030; 
+  background-color: #4ea056; 
 }
 .user-avatar {
   width: 50px;
