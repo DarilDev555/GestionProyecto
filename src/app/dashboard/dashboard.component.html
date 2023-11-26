@@ -19,7 +19,7 @@
         />
       </mat-form-field>
       <button
-        mat-button
+        mat-button matTooltip="Buscar Producto"
         class="btnBuscar"
         type="button"
         buscarProducto
@@ -29,7 +29,7 @@
       </button>
 
       <button
-        mat-button
+        mat-button matTooltip="Ver Carrito de ventas"
         class="btnCarrito"
         type="button"
         (click)="openDialogCarritoCompras()"
@@ -41,7 +41,7 @@
     <div class="table">
       <div class="actTabla">
         <button
-          mat-button
+          mat-button matTooltip="Actualizar tabla "
           class="BtnActualizar"
           type="button"
           (click)="actualizarTabla()"
@@ -108,7 +108,7 @@
           <th mat-header-cell *matHeaderCellDef>Acción</th>
           <td mat-cell *matCellDef="let element; let i = index">
             <button
-              mat-button
+              mat-button matTooltip="Agregar Producto a carrito"
               class="btnAddCarrito"
               (click)="
                 listaCarrito(

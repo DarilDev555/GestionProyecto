@@ -1,0 +1,71 @@
+body {
+    height: 90.2vh;
+}
+
+.table {
+    margin-top: 1%;
+    padding-left: 10%;
+    width: 80%;
+    font-size: 20;
+    color: black;
+}
+.mat-elevation-z8{
+    background-color: rgb(31, 83, 11); 
+    
+    
+  }
+  .paginator{
+    padding-left: 10%;
+    width: 80%;
+    
+  
+  }
+  .pag{
+    background-color: #285018; 
+    
+  }
+  .buscador {
+    margin-top: 2%;
+    padding-left: 10%;
+    width: 69%;
+  }
+  .btnActualizar {
+    background-color: orange;
+    padding: 4%;
+    border-radius: 10%;
+    cursor: pointer;
+  }
+  .btnEliminar {
+    background-color: red;
+    padding: 4%;
+    border-radius: 10%;
+    cursor: pointer;
+  }
+  .btnBuscar {
+    padding: 1%;
+    background-color: #3498db;
+    border-radius: 10%;
+    color: #fff;
+    margin-left: 1%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }
+  .BtnActualizar {
+    background-color: #3498db;
+    border-radius: 10%;
+    color: #fff;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }
+  .BtnAgregar{
+    padding: 1%;
+    background-color: green;
+    border-radius: 10%;
+    color: #fff;
+    margin-left: 1%;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }

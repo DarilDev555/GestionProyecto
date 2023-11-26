@@ -43,7 +43,6 @@ export class DashboardComponent {
   dataSource = ELEMENT_DATA;
 
   // Pagination variables
-
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalItems: number = 0;

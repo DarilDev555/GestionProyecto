@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <form class="formBuscador">
+      <mat-form-field class="buscador">
+        <mat-label>Buscar</mat-label>
+        <input
+          matInput 
+          placeholder="Código, Nombre"
+          [(ngModel)]="buscarTexto"
+          #searchInput
+          name="buscarTexto"
+        />
+      </mat-form-field>
+      <button
+        mat-button matTooltip="Buscar Usuario"
+        class="btnBuscar"
+        type="button"
+        buscarProducto
+        (click)="ObtenerUsuarios(); limpiarInput()"
+      >
+        <mat-icon mat-icon-lg id="icon">search</mat-icon>
+      </button>
+    </form>
+
+    <div class="table">
+      <div class="actTabla">
+        <button
+          mat-button matTooltip="Actualizar tabla"
+          class="BtnActualizar"
+          type="button"
+          (click)="actualizarTabla()"
+        >
+          <mat-icon class="iconUp">update</mat-icon>
+        </button>
+        <button mat-button matTooltip="Agregar Usuario" class="BtnAgregar" type="button">
+          <mat-icon class="iconUp">add_box</mat-icon>
+        </button>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!--- displayedColumns: string[] = ['id', 'nombre', 'nombreUser', 'rol','telefono','correo', 'accion'];" -->
+
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+        </ng-container>
+
+        <!-- Nombre Usuario Column -->
+        <ng-container matColumnDef="nombreUser">
+          <th mat-header-cell *matHeaderCellDef>Nombre Usuario</th>
+          <td mat-cell *matCellDef="let element">{{ element.nombreUser }}</td>
+        </ng-container>
+
+        <!-- Rol Column -->
+        <ng-container matColumnDef="rol">
+          <th mat-header-cell *matHeaderCellDef>Rol</th>
+          <td mat-cell *matCellDef="let element">{{ element.rol }}</td>
+        </ng-container>
+        <!-- Telefono Column -->
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+          <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+        </ng-container>
+        <!-- Correo Column -->
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef>Correo</th>
+          <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
+        </ng-container>
+
+        <!-- Acción Column -->
+        <ng-container matColumnDef="accion">
+          <th mat-header-cell *matHeaderCellDef>Acción</th>
+          <td mat-cell *matCellDef="let element; let i = index">
+            <button mat-button matTooltip="Actualizar Usuario" class="btnActualizar">
+              <mat-icon mat-icon-lg class="addToCard"> edit </mat-icon>
+            </button>
+            <button mat-button matTooltip="Eliminar Usuario" class="btnEliminar">
+                <mat-icon mat-icon-lg class="addToCard"> delete </mat-icon>
+              </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <div class="paginator">
+      <mat-paginator
+        #matPaginator
+        [length]="totalItems"
+        [pageSize]="itemsPerPage"
+        [pageSizeOptions]="[5, 10, 25, 50, 100]"
+        [pageIndex]="currentPage - 1"
+        (page)="onPageChange($event)"
+        class="pag"
+      >
+      </mat-paginator>
+    </div>
+  </body>
+</html>

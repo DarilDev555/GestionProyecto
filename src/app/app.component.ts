@@ -30,6 +30,10 @@ export class AppComponent {
     this.router.navigate(['/proveedores']);
     this.toggleDrawer();
   }
+  goToUsuarios() {
+    this.router.navigate(['/usuarios']);
+    this.toggleDrawer();
+  }
 
   toHome() {
     this.router.navigate(['/dashboard']);

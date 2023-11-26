@@ -25,13 +25,15 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { CreatUserDialogComponent } from './usuarios/creat-user-dialog/creat-user-dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,  
-    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, 
+    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, UsuariosComponent, CreatUserDialogComponent, 
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatTooltipModule,
     MatPaginatorModule
   ],
   providers: [],
