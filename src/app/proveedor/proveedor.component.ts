@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog'; 
-import { Proveedor } from '../modelos/proveedor';
 import { ProveedorBD } from '../modelos/proveedorBD';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProveedorAgregarComponent } from './proveedor-agregar/proveedor-agregar.component';
+import { ProveedorEditarComponent } from './proveedor-editar/proveedor-editar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +16,8 @@ export class ProveedorService {
 
   constructor(private http: HttpClient) {}
 
-  obtenerProveedores(): Observable<Proveedor[]> {
-    return this.http.get<Proveedor[]>(this.apiUrl);
+  obtenerProveedores(): Observable<ProveedorBD[]> {
+    return this.http.get<ProveedorBD[]>(this.apiUrl);
   }
 
   agregarProveedor(proveedorBD: ProveedorBD): Observable<ProveedorBD> {
@@ -28,15 +28,43 @@ export class ProveedorService {
 
     return this.http.post<ProveedorBD>(this.apiUrl, proveedorBD, { headers });
 }
-  // Agrega métodos para agregar, eliminar, editar proveedores si es necesario
+
+obtenerProveedorPorId(id: number): Observable<ProveedorBD> {
+  const url = `${this.apiUrl}${id}/`;
+  return this.http.get<ProveedorBD>(url);
 }
 
+editarProveedor(id: number, proveedorBD: ProveedorBD): Observable<ProveedorBD> {
+  const url = `${this.apiUrl}${id}/`;
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'X-CSRFToken': 'tu-token-csrf-aqui',  // Reemplaza con tu token CSRF real
+  });
+
+  return this.http.put<ProveedorBD>(url, proveedorBD, { headers });
+}
+
+eliminarProveedor(id: number): Observable<any> {
+  const url = `${this.apiUrl}${id}/`;
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'X-CSRFToken': 'tu-token-csrf-aqui',  // Reemplaza con tu token CSRF real
+  });
+
+  return this.http.delete(url, { headers });
+}
+
+ 
+}
+
+
+
 export interface PeriodicElement {
-  id: number;
-  name: string;
-  telefono: number;
-  correo: String; 
-  direccion: String;
+  ProveedorID: number;
+  Nombre: string;
+  Direccion: string;
+  Telefono: String; 
+  CorreoElectronico: String;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
@@ -56,8 +84,8 @@ export class ProveedorComponent {
   'accion'];
 
   
-  proveedoresTotales: Proveedor[] = [];
-  proveedorSelect: Proveedor[] = [];
+  proveedoresTotales: ProveedorBD[] = [];
+  proveedorSelect: ProveedorBD[] = [];
   dataSource = this.proveedoresTotales;
   isDrawerOpened = false;
   name = '';
@@ -91,58 +119,47 @@ export class ProveedorComponent {
   }
 
   resetCantidadInput() {
-  }
-
-  proveedorDelete(element: any) {
-  }
-
-  
+  } 
 
   proveedorBuscar() {    
     const buscarTexto = this.buscarTexto.trim(); // Elimina espacios en blanco alrededor
     const id = parseInt(buscarTexto);
-
+  
     console.log('texto:', buscarTexto);
     console.log('totales:', this.proveedoresTotales);
-
+  
     if (!isNaN(id)) {
       // Si la conversión a número es exitosa, busca por ID
-      const proveedorExixtente = this.proveedoresTotales.find(
-        (proveedor) => proveedor.id === id
+      this.proveedorService.obtenerProveedorPorId(id).subscribe(
+        (proveedorEncontrado) => {
+          if (proveedorEncontrado) {
+            this.elementDataToProveedor(proveedorEncontrado);
+            console.log('Encontrado (por ID):', proveedorEncontrado);
+          } else {
+            console.log('Proveedor no encontrado (por ID)');
+            // Puedes manejar la lógica de qué hacer si el proveedor no se encuentra
+          }
+        },
+        (error) => {
+          console.error('Error al obtener proveedor por ID:', error);
+          // Puedes manejar el error según tus necesidades
+        }
       );
-
-      if (proveedorExixtente) {
-        this.elementDataToProveedor(proveedorExixtente);
-        console.log('Encontrado (por ID):', proveedorExixtente);
-      } else {
-        console.log('Producto no encontrado (por ID)', proveedorExixtente);
-      }
     } else {
-      // Si no es un número, busca por nombre
-      const nombre = buscarTexto.toLowerCase(); // Convierte el texto de búsqueda a minúsculas
-
-      const proveedorExixtente = this.proveedoresTotales.find(
-        (proveedor) => this.proveedorAdd.name.toLowerCase() === nombre
-      );
-
-      if (proveedorExixtente) {
-        console.log('Encontrado (por nombre):', proveedorExixtente);
-        this.elementDataToProveedor(proveedorExixtente);
-      } else {
-        console.log('Producto no encontrado (por nombre)');
-      }
+      // Resto del código para la búsqueda por nombre, si es necesario
     }
   }
+  
 
-  elementDataToProveedor(proveedor: Proveedor) {
+  elementDataToProveedor(proveedor: ProveedorBD) {
     // Crea una nueva matriz de un solo elemento con el producto
     const newElementData: PeriodicElement[] = [
       {
-        id: proveedor.id,
-        name: proveedor.name,
-        telefono: proveedor.telefono,
-        correo: proveedor.correo,
-        direccion: proveedor.direccion,
+        ProveedorID: proveedor.ProveedorID,
+        Nombre: proveedor.Nombre,
+        Direccion: proveedor.Direccion+"",
+        Telefono: proveedor.Telefono,
+        CorreoElectronico: proveedor.CorreoElectronico,
       },
     ];
 
@@ -191,6 +208,7 @@ export class ProveedorComponent {
       width: '70vh',
       height: '50vh',
       data: {
+        ProveedorID: 0,
         Nombre: '',
         Direccion: '',
         Telefono: '',
@@ -214,10 +232,56 @@ export class ProveedorComponent {
     });
   }
 
-  proveedorEdit() {
-
-    
+  proveedorEdit(id: number): void {
+    // Obtener la información del proveedor por su ID
+    this.proveedorService.obtenerProveedorPorId(id).subscribe(
+      (proveedor: ProveedorBD) => {
+        // Abrir el diálogo con la información del proveedor
+        const dialogRef = this.dialog.open(ProveedorEditarComponent, {
+          width: '70vh',
+          height: '50vh',
+          data: {
+            Nombre: proveedor.Nombre,
+            Direccion: proveedor.Direccion,
+            Telefono: proveedor.Telefono,
+            CorreoElectronico: proveedor.CorreoElectronico
+          } as ProveedorBD
+        });
+  
+        dialogRef.afterClosed().subscribe(result => {
+            
+          this.proveedorService.editarProveedor(id,result).subscribe(
+            (proveedorEditado) => {
+                
+                console.log('Solicitud a enviar:', JSON.stringify(result));
+                // Resto del código
+            },
+            (error) => {
+              console.log('Proveedor a agregar:', result);
+            }
+        );
+        });
+      });
   }
+
+  
+  proveedorDelete(id: number) {
+    
+    this.proveedorService.eliminarProveedor(id).subscribe(
+      (proveedorEditado) => {
+          
+          console.log('Solicitud a enviar:', JSON.stringify(id));
+          // Resto del código
+      },
+      (error) => {
+        console.log('Proveedor a agregar:', id);
+      }
+  );
+  
+}
+
+
+  
 
 
 }
