@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog'; 
 import { Proveedor } from '../modelos/proveedor';
-
+import { ProveedorBD } from '../modelos/proveedorBD';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,9 +19,14 @@ export class ProveedorService {
     return this.http.get<Proveedor[]>(this.apiUrl);
   }
 
-  agregarProveedor(proveedor: Proveedor): Observable<Proveedor> {
-    return this.http.post<Proveedor>(this.apiUrl, proveedor);
-  }
+  agregarProveedor(proveedorBD: ProveedorBD): Observable<ProveedorBD> {
+    const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'X-CSRFToken': 'tu-token-csrf-aqui',  // Reemplaza con tu token CSRF real
+    });
+
+    return this.http.post<ProveedorBD>(this.apiUrl, proveedorBD, { headers });
+}
   // Agrega métodos para agregar, eliminar, editar proveedores si es necesario
 }
 
@@ -156,33 +161,27 @@ export class ProveedorComponent {
     // Aquí podrías abrir un diálogo/modal para recopilar la información del nuevo proveedor
     // y luego llamar al servicio para agregarlo.
 
-    const nuevoProveedor: Proveedor = {
-      id: 8,  // No incluyas el ID, ya que será asignado por la base de datos
-      name: 'Nuevo Proveedor',  // Cambia estos valores con los datos reales del nuevo proveedor
-      telefono: 9512170127,
-      correo: 'nuevo@proveedor.com',
-      direccion: 'Dirección del Nuevo Proveedor',
+    const nuevoProveedor: ProveedorBD = {
+      
+      Nombre: 'Nombre',
+      Direccion: 'Dirección',
+      Telefono: "9512170127",
+      CorreoElectronico: 'floria89@gmail.com',
+      
     };
 
-    this.proveedorService.agregarProveedor(nuevoProveedor).subscribe(
-      (proveedorAgregado) => {
-        console.log('Proveedor agregado:', proveedorAgregado);
+  this.proveedorService.agregarProveedor(nuevoProveedor).subscribe(
+    (proveedorAgregado) => {
         
-        // Actualizar la lista de proveedores después de agregar uno nuevo
-        this.proveedorService.obtenerProveedores().subscribe(
-          (data) => {
-            this.proveedoresTotales = data;
-            this.dataSource = this.proveedoresTotales;
-          },
-          (error) => {
-            console.error('Error al obtener proveedores desde la API:', error);
-          }
-        );
-      },
-      (error) => {
+        console.log('Solicitud a enviar:', JSON.stringify(nuevoProveedor));
+        // Resto del código
+    },
+    (error) => {
+      console.log('Proveedor a agregar:', nuevoProveedor);
         console.error('Error al agregar proveedor:', error);
-      }
-    );
+        console.log('Cuerpo de la respuesta completa:', error.error);
+    }
+);
   }
 
 
