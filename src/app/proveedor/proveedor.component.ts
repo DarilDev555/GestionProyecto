@@ -63,8 +63,8 @@ export interface PeriodicElement {
   ProveedorID: number;
   Nombre: string;
   Direccion: string;
-  Telefono: String; 
-  CorreoElectronico: String;
+  Telefono: string; 
+  CorreoElectronico: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
@@ -157,7 +157,7 @@ export class ProveedorComponent {
       {
         ProveedorID: proveedor.ProveedorID,
         Nombre: proveedor.Nombre,
-        Direccion: proveedor.Direccion+"",
+        Direccion: proveedor.Direccion,
         Telefono: proveedor.Telefono,
         CorreoElectronico: proveedor.CorreoElectronico,
       },
@@ -173,35 +173,6 @@ export class ProveedorComponent {
     this.buscarTexto = '';
   }
 
-
-  proveedorAdd() {
-    // Aquí podrías abrir un diálogo/modal para recopilar la información del nuevo proveedor
-    // y luego llamar al servicio para agregarlo.
-    //const dialogRef = this.dialog.open(ProveedorAgregarComponent, {
-    //});
-/*
-              const nuevoProveedor: ProveedorBD = {
-                
-                Nombre: 'Nombre',
-                Direccion: 'Dirección',
-                Telefono: "9512170127",
-                CorreoElectronico: 'floria89@gmail.com',
-                
-              };
-
-            this.proveedorService.agregarProveedor(nuevoProveedor).subscribe(
-              (proveedorAgregado) => {
-                  
-                  console.log('Solicitud a enviar:', JSON.stringify(nuevoProveedor));
-                  // Resto del código
-              },
-              (error) => {
-                console.log('Proveedor a agregar:', nuevoProveedor);
-                  console.error('Error al agregar proveedor:', error);
-                  console.log('Cuerpo de la respuesta completa:', error.error);
-              }
-          );*/
-  }
 
   openModal(): void {
     const dialogRef = this.dialog.open(ProveedorAgregarComponent, {
