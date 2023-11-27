@@ -25,13 +25,15 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import { ProveedorAgregarComponent } from './proveedor/proveedor-agregar/proveedor-agregar.component';
+import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor-editar.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,  
-    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, 
+    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, ProveedorAgregarComponent, ProveedorEditarComponent,
   ],
   imports: [
     BrowserModule,

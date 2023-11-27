@@ -6,6 +6,7 @@ import { ProveedorBD } from '../modelos/proveedorBD';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ProveedorAgregarComponent } from './proveedor-agregar/proveedor-agregar.component';
 
 @Injectable({
   providedIn: 'root',
@@ -95,8 +96,7 @@ export class ProveedorComponent {
   proveedorDelete(element: any) {
   }
 
-  proveedorEdit() {
-  }
+  
 
   proveedorBuscar() {    
     const buscarTexto = this.buscarTexto.trim(); // Elimina espacios en blanco alrededor
@@ -160,28 +160,63 @@ export class ProveedorComponent {
   proveedorAdd() {
     // Aquí podrías abrir un diálogo/modal para recopilar la información del nuevo proveedor
     // y luego llamar al servicio para agregarlo.
+    //const dialogRef = this.dialog.open(ProveedorAgregarComponent, {
+    //});
+/*
+              const nuevoProveedor: ProveedorBD = {
+                
+                Nombre: 'Nombre',
+                Direccion: 'Dirección',
+                Telefono: "9512170127",
+                CorreoElectronico: 'floria89@gmail.com',
+                
+              };
 
-    const nuevoProveedor: ProveedorBD = {
-      
-      Nombre: 'Nombre',
-      Direccion: 'Dirección',
-      Telefono: "9512170127",
-      CorreoElectronico: 'floria89@gmail.com',
-      
-    };
+            this.proveedorService.agregarProveedor(nuevoProveedor).subscribe(
+              (proveedorAgregado) => {
+                  
+                  console.log('Solicitud a enviar:', JSON.stringify(nuevoProveedor));
+                  // Resto del código
+              },
+              (error) => {
+                console.log('Proveedor a agregar:', nuevoProveedor);
+                  console.error('Error al agregar proveedor:', error);
+                  console.log('Cuerpo de la respuesta completa:', error.error);
+              }
+          );*/
+  }
 
-  this.proveedorService.agregarProveedor(nuevoProveedor).subscribe(
-    (proveedorAgregado) => {
-        
-        console.log('Solicitud a enviar:', JSON.stringify(nuevoProveedor));
-        // Resto del código
-    },
-    (error) => {
-      console.log('Proveedor a agregar:', nuevoProveedor);
-        console.error('Error al agregar proveedor:', error);
-        console.log('Cuerpo de la respuesta completa:', error.error);
-    }
-);
+  openModal(): void {
+    const dialogRef = this.dialog.open(ProveedorAgregarComponent, {
+      width: '70vh',
+      height: '50vh',
+      data: {
+        Nombre: '',
+        Direccion: '',
+        Telefono: '',
+        CorreoElectronico: ''
+      } as ProveedorBD
+    });
+
+    
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.proveedorService.agregarProveedor(result).subscribe(
+        (proveedorAgregado) => {
+            
+            console.log('Solicitud a enviar:', JSON.stringify(result));
+            // Resto del código
+        },
+        (error) => {
+          console.log('Proveedor a agregar:', result);
+        }
+    );
+    });
+  }
+
+  proveedorEdit() {
+
+    
   }
 
 
