@@ -14,7 +14,8 @@ import { ProveedorBD } from 'src/app/modelos/proveedorBD';
 
 export class ProveedorAgregarComponent {
   
-
+  Nombre!: string;
+  
   constructor(
     public dialogRef: MatDialogRef<ProveedorAgregarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ProveedorBD

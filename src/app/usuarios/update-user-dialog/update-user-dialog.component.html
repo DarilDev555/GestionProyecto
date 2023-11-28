@@ -1,53 +1,53 @@
-<form class="example-form custom-form" [formGroup]="loginForm">
+<form *ngIf="loginForm"  class="example-form custom-form" [formGroup]="loginForm">
  
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>Nombre</mat-label>
-            <input matInput name="nombre" formControlName="nombre" [(ngModel)]="user.Nombre">
+            <input matInput [(ngModel)]="nombre" name="nombre" formControlName="nombre" [(ngModel)]="usuario.Nombre">
 
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>Password</mat-label>
-            <input matInput type="password" name="password" formControlName="password" [(ngModel)]="user.Password">
+            <input matInput type="password" name="password" formControlName="password" [(ngModel)]="usuario.Password">
 
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>Nombre Usuario</mat-label>
-            <input matInput name="nombreUsuario" formControlName="nombreUsuario" [(ngModel)]="user.Usuario">
+            <input matInput name="nombreUsuario" formControlName="nombreUsuario" [(ngModel)]="usuario.Usuario">
         </mat-form-field>
     </div>
     
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>Cargo</mat-label>
-            <input matInput name="cargo" formControlName="cargo" [(ngModel)]="user.Cargo">
+            <input matInput name="cargo" formControlName="cargo" [(ngModel)]="usuario.Cargo">
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>Teléfono</mat-label>
-            <input matInput name="telefono"  formControlName="telefono" [(ngModel)]="user.Telefono" >
+            <input matInput name="telefono"  formControlName="telefono" [(ngModel)]="usuario.Telefono">
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>Correo Electronico</mat-label>
-            <input matInput name="correoElectronico"  formControlName="correoElectronico" [(ngModel)]="user.CorreoElectronico" >
+            <input matInput name="correoElectronico"  formControlName="correoElectronico" [(ngModel)]="usuario.CorreoElectronico">
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>RolID</mat-label>
-            <input matInput name="rolID"  formControlName="rolID" [(ngModel)]="user.RolID">
+            <input matInput name="rolID"  formControlName="rolID" [(ngModel)]="usuario.RolID">
         </mat-form-field>
     </div>
     <div mat-dialog-actions class="centered-button">
         <button mat-button (click)="onCancel()">Cancel</button>
-        <button mat-button (click)="oncreate()"  type="submit" mat-raised-button [disabled]="!loginForm.valid" >Guardar</button>
+        <button mat-button (click)="onUpdate()"  type="submit" mat-raised-button [disabled]="!loginForm.valid" >Guardar</button>
     </div>
 
 </form>

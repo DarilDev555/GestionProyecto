@@ -1,4 +1,5 @@
-export interface User{
+export interface User {
+    EmpleadoID: number;
     Usuario: string;
     Password: string;
     Nombre: string;

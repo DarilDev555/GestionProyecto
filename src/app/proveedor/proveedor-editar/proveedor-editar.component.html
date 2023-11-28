@@ -2,20 +2,20 @@
 <form class="two-column-form">
   <div class="column">
     <label for="nombre">Nombre:</label>
-    <input id="nombre" [(ngModel)]="data.Nombre" name="nombre" required>
+    <input id="nombre"  name="nombre" required>
 
     <label for="direccion">Dirección:</label>
-    <input id="direccion" [(ngModel)]="data.Direccion" name="direccion" required>
+    <input id="direccion"  name="direccion" required>
   </div>
 
   <div class="column">
     <label for="telefono">Teléfono:</label>
-    <input id="telefono" [(ngModel)]="data.Telefono" name="telefono" required>
+    <input id="telefono"  name="telefono" required>
 
     <label for="correoElectronico">Correo Electrónico:</label>
-    <input id="correoElectronico" [(ngModel)]="data.CorreoElectronico" name="CorreoElectronico" required>
+    <input id="correoElectronico" name="CorreoElectronico" required>
   </div>
 
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Editar</button>
+  <button mat-button cdkFocusInitial>Editar</button>
 </form>

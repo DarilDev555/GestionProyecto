@@ -24,27 +24,31 @@ import { FormsModule, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-<<<<<<< HEAD
+
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreatUserDialogComponent } from './usuarios/creat-user-dialog/creat-user-dialog.component';
 import { UpdateUserDialogComponent } from './usuarios/update-user-dialog/update-user-dialog.component';
 
-=======
 import { ProveedorAgregarComponent } from './proveedor/proveedor-agregar/proveedor-agregar.component';
 import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor-editar.component';
->>>>>>> 3930723246349c89812fe8e2f7697c4a8da300cd
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,  
-<<<<<<< HEAD
-    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, UsuariosComponent, CreatUserDialogComponent, UpdateUserDialogComponent, 
-=======
-    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, ProveedorAgregarComponent, ProveedorEditarComponent,
->>>>>>> 3930723246349c89812fe8e2f7697c4a8da300cd
+
+    DashboardComponent,
+    CarritoComprasComponent,
+    ProveedorComponent,
+    LoginPageComponent, 
+    ConfirmacionVDialogComponent, 
+    UsuariosComponent, 
+    CreatUserDialogComponent, 
+    UpdateUserDialogComponent, 
+
   ],
   imports: [
     BrowserModule,
