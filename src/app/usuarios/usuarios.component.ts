@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../modelos/user';
 import { CreatUserDialogComponent } from './../usuarios/creat-user-dialog/creat-user-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import {UpdateUserDialogComponent} from './../usuarios/update-user-dialog/update-user-dialog.component';
+import { UpdateUserDialogComponent } from './../usuarios/update-user-dialog/update-user-dialog.component';
 
 export interface PeriodicElement {
   id: number;
@@ -201,7 +201,6 @@ export class UsuariosComponent {
     );
   }
 
-
   openUpdateDialog(usuario: User) {
     console.log('Opening update...', usuario);
 
@@ -215,7 +214,6 @@ export class UsuariosComponent {
         if (updatedUsuario) {
           //this.buscarUser(updatedUsuario) ;
           this.updateUsuario(updatedUsuario);
-          
         }
       });
     }
@@ -225,7 +223,6 @@ export class UsuariosComponent {
       console.error('user ID is missing.');
       return;
     }
-
 
     const apiUrl = `http://127.0.0.1:8000/api/Empleados/${usuario.EmpleadoID}/`;
 
@@ -241,7 +238,7 @@ export class UsuariosComponent {
       RolID: usuario.RolID,
     };
 
-    console.log('url:',apiUrl, 'user:',updatedUserData)
+    console.log('url:', apiUrl, 'user:', updatedUserData);
     this.http.put(apiUrl, updatedUserData).subscribe(
       () => {
         // Update success logic
@@ -281,8 +278,6 @@ export class UsuariosComponent {
     );
   }
 
-  
-
   onPageChange(event: any) {
     if (event.pageSize == undefined) {
       console.log('item por pag seleccionada', event.pageSize);
@@ -305,5 +300,57 @@ export class UsuariosComponent {
     return this.usuarios.slice(startIndex, endIndex);
   }
 
-  
+  buscarUsuarioT() {
+    const buscarTexto = this.buscarTexto.trim(); // Elimina espacios en blanco alrededor
+    const id = parseInt(buscarTexto);
+
+    console.log('texto:', buscarTexto);
+    console.log('totales:', this.usuarios);
+
+    if (!isNaN(id)) {
+      // Si la conversión a número es exitosa, busca por ID
+      const usuarioExistente = this.usuarios.find(
+        (usuario) => usuario.id === id
+      );
+
+      if (usuarioExistente) {
+        this.elementDataToUser(usuarioExistente);
+        console.log('Encontrado (por ID):', usuarioExistente);
+      } else {
+        console.log('Producto no encontrado (por ID)', usuarioExistente);
+      }
+    } else {
+      // Si no es un número, busca por nombre
+      const nombre = buscarTexto.toLowerCase(); // Convierte el texto de búsqueda a minúsculas
+
+      const usuarioExistente = this.usuarios.find(
+        (usuario) => usuario.nombre.toLowerCase() === nombre
+      );
+
+      if (usuarioExistente) {
+        console.log('Encontrado (por nombre):', usuarioExistente);
+        this.elementDataToUser(usuarioExistente);
+      } else {
+        console.log('Producto no encontrado (por nombre)');
+      }
+    }
+  }
+  elementDataToUser(usuario: UsuarioM) {
+    // Crea una nueva matriz de un solo elemento con el producto
+    const newElementData: PeriodicElement[] = [
+      {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        nombreUser: usuario.nombreUser,
+        rol: usuario.rol,
+        telefono: usuario.telefono,
+        correo: usuario.correo,
+      },
+    ];
+
+    // Actualiza dataSource para reflejar los cambios
+    this.dataSource = newElementData;
+    console.log('elementdata:', ELEMENT_DATA);
+    console.log('datasource:', this.dataSource);
+  }
 }
