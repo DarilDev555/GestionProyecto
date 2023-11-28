@@ -93,7 +93,13 @@ export class ProveedorComponent {
   imag = '';
   buscarTexto: string = '';
 
-
+  // Pagination variables
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalItems: number = 0;
+  i: number = 1;
+  totalPages: number = 0;
+  selectedPage: number = 0;
   
   constructor(private router: Router, public dialog: MatDialog, private proveedorService: ProveedorService) {
     // Reemplaza la inicialización de this.proveedoresTotales con una llamada al servicio
@@ -251,6 +257,24 @@ export class ProveedorComponent {
   
 }
 
+onPageChange(event: any) {
+    
+
+  if (event.pageSize == undefined) {
+    console.log('item por pag seleccionada', event.pageSize);
+    this.itemsPerPage = 5;
+  }else{
+    this.itemsPerPage = event.pageSize;
+  }
+  
+
+  this.currentPage = event.pageIndex + 1;
+
+  // Obtener los productos de la página actual directamente desde this.productosTotales
+  const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  const endIndex = startIndex + this.itemsPerPage;
+  this.dataSource = this.proveedoresTotales.slice(startIndex, endIndex);
+}
 
   
 

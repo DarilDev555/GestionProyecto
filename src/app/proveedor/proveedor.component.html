@@ -72,4 +72,20 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
+
+
 </div>
+
+<div class="paginator">
+  <mat-paginator
+    #matPaginator
+    [length]="totalItems"
+    [pageSize]="itemsPerPage"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+    [pageIndex]="currentPage - 1"
+    (page)="onPageChange($event)"
+    class="pag"
+  >
+  </mat-paginator>
+</div>
+

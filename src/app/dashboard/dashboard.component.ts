@@ -261,9 +261,5 @@ export class DashboardComponent {
     this.dataSource = this.productosTotales.slice(startIndex, endIndex);
   }
 
-  getCurrentPageProductos() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    return this.productosTotales.slice(startIndex, endIndex);
-  }
+
 }

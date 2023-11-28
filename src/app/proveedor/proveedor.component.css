@@ -152,3 +152,26 @@ height: 40px;
 .example-card {
 max-width: 400px;
 }
+
+.mat-elevation-z8{
+  background-color: rgb(31, 83, 11); 
+  
+  
+}
+.paginator{
+  padding-left: 10%;
+  width: 80%;
+  
+
+}
+.pag{
+  background-color: #285018; 
+  
+}
+
+.paginator{
+  padding-left: 10%;
+  width: 80%;
+  
+
+}
