@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,19 +20,22 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { ProveedorComponent } from './proveedor/proveedor.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { ConfirmacionVDialogComponent } from './dashboard/confirmacion-v-dialog/confirmacion-v-dialog.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule, FormGroup, Validators } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreatUserDialogComponent } from './usuarios/creat-user-dialog/creat-user-dialog.component';
+import { UpdateUserDialogComponent } from './usuarios/update-user-dialog/update-user-dialog.component';
+
+
 
 
 @NgModule({
   declarations: [
     AppComponent,  
-    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, UsuariosComponent, CreatUserDialogComponent, 
+    DashboardComponent, CarritoComprasComponent, ProveedorComponent, LoginPageComponent, ConfirmacionVDialogComponent, UsuariosComponent, CreatUserDialogComponent, UpdateUserDialogComponent, 
   ],
   imports: [
     BrowserModule,
