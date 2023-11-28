@@ -7,7 +7,7 @@
   <button mat-button class="btnBuscar" type="button" proveedorBuscar (click)="proveedorBuscar(); limpiarInput()">
     <mat-icon mat-icon-lg id="icon">search</mat-icon>
   </button>
-  <button mat-button class="btnAgregarProveedor" (click)="proveedorAdd(); limpiarInput()">
+  <button mat-button class="btnAgregarProveedor" (click)="openModal();">
     <mat-icon mat-icon-lg id="icon">add_circle</mat-icon>
   </button>
 </form>
@@ -21,47 +21,47 @@
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.ProveedorID }}</td>
       </ng-container>
 
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
+      <!-- Name Column -->  
+      <ng-container matColumnDef="nombre">
         <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.Nombre  }}</td>
       </ng-container>
 
     <ng-container matColumnDef="direccion">
       <th mat-header-cell *matHeaderCellDef>Precio</th>
 
-      <td mat-cell *matCellDef="let element">{{ element.direccion }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.Direccion }}</td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="correo">
 
       <th mat-header-cell *matHeaderCellDef>Correo</th>
-      <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.CorreoElectronico }}</td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="telefono">
 
       <th mat-header-cell *matHeaderCellDef>Telefono</th>
-      <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.Telefono }}</td>
     </ng-container>
 
     <ng-container matColumnDef="accion">
       <th mat-header-cell *matHeaderCellDef>Acción</th>
       <td mat-cell *matCellDef="let element">
 
-        <button mat-button class="btnDeleteProveedor" (click)="proveedorDelete(element)">
+        <button mat-button class="btnDeleteProveedor" (click)="proveedorDelete(element.ProveedorID)">
           <mat-icon on mat-icon-lg class="addToCard">
           delete
           </mat-icon>
         </button>
       
-        <button mat-button class="btnEditProveedor" (click)="proveedorEdit()">
+        <button mat-button class="btnEditProveedor" (click)="proveedorEdit(element.ProveedorID)">
           <mat-icon on mat-icon-lg class="addToCard">
             border_color
           </mat-icon>
