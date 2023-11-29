@@ -10,7 +10,6 @@ body{
   
 }
 .mat-elevation-z8{
-  color: black;
   background-color: #4ea056; 
   
   
@@ -31,10 +30,17 @@ body{
   width: 69%;
 }
 
-.cantidadProducto{
 
+
+.example-full-width{
   background-color: #4ea056; 
 }
+
+
+::ng-deep .mat-form-field-appearance-outline.specific-border .mat-form-field-outline {
+  background-color: lightgray !important;
+  border-radius: 5px;
+  }
 
 .btnAddCarrito {
   background-color: #3498db;

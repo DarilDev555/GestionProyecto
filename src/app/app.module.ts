@@ -47,7 +47,9 @@ import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor
     ConfirmacionVDialogComponent, 
     UsuariosComponent, 
     CreatUserDialogComponent, 
-    UpdateUserDialogComponent, 
+    UpdateUserDialogComponent,
+    ProveedorAgregarComponent, 
+    ProveedorEditarComponent,
 
   ],
   imports: [
@@ -69,7 +71,8 @@ import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor
     ReactiveFormsModule,
     AppRoutingModule,
     MatTooltipModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

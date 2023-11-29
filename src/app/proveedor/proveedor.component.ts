@@ -115,6 +115,18 @@ export class ProveedorComponent {
     );
   }
   
+  actualizar(){
+    this.proveedorService.obtenerProveedores().subscribe(
+      (data) => {
+        console.log('Datos de la API:', data);
+        this.proveedoresTotales = data;
+        this.dataSource = this.proveedoresTotales;
+      },
+      (error) => {
+        console.error('Error al obtener proveedores desde la API:', error);
+      }
+    );
+  }
 
   toggleDrawer() {
     this.isDrawerOpened = !this.isDrawerOpened;
@@ -186,14 +198,12 @@ export class ProveedorComponent {
       height: '50vh',
       data: {
         ProveedorID: 0,
-        Nombre: '',
+        Nombre: 'nada',
         Direccion: '',
         Telefono: '',
         CorreoElectronico: ''
       } as ProveedorBD
     });
-
-    
 
     dialogRef.afterClosed().subscribe(result => {
       this.proveedorService.agregarProveedor(result).subscribe(
@@ -212,12 +222,13 @@ export class ProveedorComponent {
   proveedorEdit(id: number): void {
     // Obtener la información del proveedor por su ID
     this.proveedorService.obtenerProveedorPorId(id).subscribe(
-      (proveedor: ProveedorBD) => {
+      (proveedor) => {
         // Abrir el diálogo con la información del proveedor
         const dialogRef = this.dialog.open(ProveedorEditarComponent, {
           width: '70vh',
           height: '50vh',
           data: {
+            ProveedorID: proveedor.ProveedorID,
             Nombre: proveedor.Nombre,
             Direccion: proveedor.Direccion,
             Telefono: proveedor.Telefono,
@@ -232,6 +243,7 @@ export class ProveedorComponent {
                 
                 console.log('Solicitud a enviar:', JSON.stringify(result));
                 // Resto del código
+                this.actualizar();
             },
             (error) => {
               console.log('Proveedor a agregar:', result);
@@ -249,6 +261,7 @@ export class ProveedorComponent {
           
           console.log('Solicitud a enviar:', JSON.stringify(id));
           // Resto del código
+          this.actualizar();
       },
       (error) => {
         console.log('Proveedor a agregar:', id);
