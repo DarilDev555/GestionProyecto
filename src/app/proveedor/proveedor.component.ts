@@ -107,7 +107,11 @@ export class ProveedorComponent {
       (data) => {
         console.log('Datos de la API:', data);
         this.proveedoresTotales = data;
-        this.dataSource = this.proveedoresTotales;
+        this.dataSource = this.proveedoresTotales.slice(0, this.itemsPerPage);
+        this.totalItems = this.proveedoresTotales.length;
+          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+
+          this.onPageChange({ pageIndex: this.currentPage - 1 });
       },
       (error) => {
         console.error('Error al obtener proveedores desde la API:', error);
@@ -115,12 +119,11 @@ export class ProveedorComponent {
     );
   }
   
-  actualizar(){
+  actualizar() {
     this.proveedorService.obtenerProveedores().subscribe(
       (data) => {
-        console.log('Datos de la API:', data);
-        this.proveedoresTotales = data;
-        this.dataSource = this.proveedoresTotales;
+        this.dataSource = data;
+        this.totalItems = data.length;
       },
       (error) => {
         console.error('Error al obtener proveedores desde la API:', error);
@@ -288,8 +291,5 @@ onPageChange(event: any) {
   const endIndex = startIndex + this.itemsPerPage;
   this.dataSource = this.proveedoresTotales.slice(startIndex, endIndex);
 }
-
-  
-
 
 }

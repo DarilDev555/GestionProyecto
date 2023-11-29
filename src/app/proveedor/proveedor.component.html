@@ -2,12 +2,12 @@
 
   <mat-form-field class="buscador">
     <mat-label>Buscar</mat-label>
-    <input matInput placeholder="Código, Nombre" [(ngModel)]="buscarTexto" #searchInput name="buscarTexto" />
+    <input matInput placeholder="Código" [(ngModel)]="buscarTexto" #searchInput name="buscarTexto" />
   </mat-form-field>
-  <button mat-button class="btnBuscar" type="button" proveedorBuscar (click)="proveedorBuscar(); limpiarInput()">
+  <button mat-button class="btnBuscar" matTooltip="Buscar Proveedor" type="button" proveedorBuscar (click)="proveedorBuscar(); limpiarInput()">
     <mat-icon mat-icon-lg id="icon">search</mat-icon>
   </button>
-  <button mat-button class="btnAgregarProveedor" (click)="openModal();">
+  <button mat-button class="btnAgregarProveedor" matTooltip="Agregar Nuevo Proveedor" (click)="openModal();">
     <mat-icon mat-icon-lg id="icon">add_circle</mat-icon>
   </button>
 </form>
@@ -52,16 +52,16 @@
     </ng-container>
 
     <ng-container matColumnDef="accion">
-      <th mat-header-cell *matHeaderCellDef>Acción</th>
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let element">
 
-        <button mat-button class="btnDeleteProveedor" (click)="proveedorDelete(element.ProveedorID)">
+        <button mat-button class="btnDeleteProveedor" matTooltip="Eliminar Proveedor" (click)="proveedorDelete(element.ProveedorID)">
           <mat-icon on mat-icon-lg class="addToCard">
           delete
           </mat-icon>
         </button>
       
-        <button mat-button class="btnEditProveedor" (click)="proveedorEdit(element.ProveedorID)">
+        <button mat-button class="btnEditProveedor" matTooltip="Editar Proveedor" (click)="proveedorEdit(element.ProveedorID)">
           <mat-icon on mat-icon-lg class="addToCard">
             border_color
           </mat-icon>
