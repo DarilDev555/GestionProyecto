@@ -5,7 +5,7 @@ import {ProveedorComponent} from './proveedor/proveedor.component'
 import {AppComponent} from './app.component'
 import {LoginPageComponent} from './login-page/login-page.component'
 import {UsuariosComponent} from './usuarios/usuarios.component'
-
+import { ProductosComponentComponent } from './productos/productos-component/productos-component.component';
 
 
 const routes: Routes = [
@@ -14,6 +14,7 @@ const routes: Routes = [
   {path: 'login', component: LoginPageComponent },
   {path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: 'usuarios', component: UsuariosComponent},
+  {path: 'porductos', component: ProductosComponentComponent}
 
 
 ];

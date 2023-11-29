@@ -1,0 +1,78 @@
+<form class="formBuscador">
+    <mat-form-field class="buscador">
+      <mat-label>Buscar</mat-label>
+      <input matInput placeholder="Código, Nombre" [(ngModel)]="buscarTexto" #searchInput name="buscarTexto" />
+    </mat-form-field>
+  
+    <button mat-icon-button class="btnBuscar" matTooltip="Buscar Producto" type="button" produtoBuscar (click)="productoBuscar(); limpiarInput()">
+      <mat-icon>search</mat-icon>
+    </button>
+  
+    <button mat-icon-button class="btnAgregarProducto" (click)="openModal();">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </form>
+  
+  <div class="table">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+  
+      <!-- Nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
+  
+      <!-- Precio Column -->
+      <ng-container matColumnDef="precio">
+        <th mat-header-cell *matHeaderCellDef>Precio</th>
+        <td mat-cell *matCellDef="let element">{{ element.precio }}</td>
+      </ng-container>
+  
+      <!-- Stock Column -->
+      <ng-container matColumnDef="stock">
+        <th mat-header-cell *matHeaderCellDef>Stock</th>
+        <td mat-cell *matCellDef="let element">{{ element.stock }}</td>
+      </ng-container>
+  
+      <!-- Descripción Column -->
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef>Descripción</th>
+        <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
+      </ng-container>
+  
+      <!-- Acción Column -->
+      <ng-container matColumnDef="accion">
+        <th mat-header-cell *matHeaderCellDef>Acción</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button class="btnDeleteProducto" (click)="productosDelete(element.id)">
+            <mat-icon mat-icon-lg class="addToCard">delete</mat-icon>
+          </button>
+          <button mat-button class="btnEditProducto" (click)="productosEdit(element.id)">
+            <mat-icon mat-icon-lg class="addToCard">border_color</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  
+  <div class="paginator">
+    <mat-paginator
+      #matPaginator
+      [length]="totalItems"
+      [pageSize]="itemsPerPage"
+      [pageSizeOptions]="[5, 10, 25, 50, 100]"
+      [pageIndex]="currentPage - 1"
+      (page)="onPageChange($event)"
+      class="pag"
+    ></mat-paginator>
+  </div>
+  

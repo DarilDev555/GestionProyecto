@@ -34,6 +34,10 @@ export class AppComponent {
     this.router.navigate(['/usuarios']);
     this.toggleDrawer();
   }
+  goToProductos() {
+    this.router.navigate(['/porductos']);
+    this.toggleDrawer();
+  }
 
   toHome() {
     this.router.navigate(['/dashboard']);

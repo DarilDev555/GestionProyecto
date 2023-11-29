@@ -33,6 +33,7 @@ import { UpdateUserDialogComponent } from './usuarios/update-user-dialog/update-
 import { ProveedorAgregarComponent } from './proveedor/proveedor-agregar/proveedor-agregar.component';
 import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor-editar.component';
 
+import { ProductosComponentModule } from './productos/productos.module';
 
 
 
@@ -69,7 +70,8 @@ import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor
     ReactiveFormsModule,
     AppRoutingModule,
     MatTooltipModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ProductosComponentModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

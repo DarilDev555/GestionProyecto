@@ -46,9 +46,9 @@ export class DashboardComponent {
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalItems: number = 0;
-  i: number = 1;
-  totalPages: number = 0;
-  selectedPage: number = 0;
+    i: number = 1;
+    totalPages: number = 0;
+    selectedPage: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -216,6 +216,7 @@ export class DashboardComponent {
               descripcion: productDataFull.Descripcion,
               precio: productDataFull.Precio,
               stock: productDataFull.Stock,
+             
             };
             this.producs.push(product);
             this.productosTotales.push({
