@@ -30,6 +30,8 @@ import { UpdateUserDialogComponent } from './usuarios/update-user-dialog/update-
 import { ProveedorAgregarComponent } from './proveedor/proveedor-agregar/proveedor-agregar.component';
 import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor-editar.component';
 import{ ProductosComponentComponent} from './productos/productos-component/productos-component.component'
+import { EditProductosComponent } from './productos/edit-productos/edit-productos.component';
+import { AgregarProductoComponent } from './productos/agregar-producto/agregar-producto.component';
 
 
 
@@ -48,7 +50,7 @@ import{ ProductosComponentComponent} from './productos/productos-component/produ
     ProveedorAgregarComponent, 
     ProveedorEditarComponent,
     ProductosComponentComponent,
-
+    AgregarProductoComponent,
   ],
   imports: [
     BrowserModule,

@@ -112,6 +112,24 @@ export class ProductosComponentComponent {
 
   resetCantidadInput() {}
 
+  actualizar() {
+    this.productosService.obtenerProductos().subscribe(
+      (data) => {
+        this.dataSource = data;
+        this.totalItems = data.length;
+        this.productosTotales = data;
+        this.dataSource = this.productosTotales.slice(0, this.itemsPerPage);
+        this.totalItems = this.productosTotales.length;
+          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+
+          this.onPageChange({ pageIndex: this.currentPage - 1 });
+      },
+      (error) => {
+        console.error('Error al obtener proveedores desde la API:', error);
+      }
+    );
+  }
+
   productoBuscar() {
     const buscarTexto = this.buscarTexto.trim(); // Elimina espacios en blanco alrededor
     const id = parseInt(buscarTexto);
@@ -268,13 +286,13 @@ export class ProductosComponentComponent {
             };
 
             this.productosTotales.push(product);
-            console.log('Lista de productos de la api', this.productosTotales);
 
             this.dataSource = this.productosTotales.slice(0, this.itemsPerPage);
           }
           this.totalItems = this.productosTotales.length;
           this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
 
+          console.log('Lista de productos de la api', this.productosTotales);
           this.onPageChange({ pageIndex: this.currentPage - 1 });
         },
         (error) => {
