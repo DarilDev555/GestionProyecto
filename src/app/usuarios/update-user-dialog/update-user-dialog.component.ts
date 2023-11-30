@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA,} from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-update-user-dialog',
   templateUrl: './update-user-dialog.component.html',
@@ -17,6 +18,7 @@ export class UpdateUserDialogComponent {
   loginForm!: FormGroup;
   dataSource!: MatTableDataSource<User>;
 
+  correoElectronico!: any;
   nombre!: string;
 
   constructor(
@@ -24,13 +26,26 @@ export class UpdateUserDialogComponent {
     private fb: FormBuilder,
     private http: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data: UsuarioM
-  ) {  }
+  ) { 
+    this.user = { ...data };
+    this.loginForm = this.fb.group({
+      nombre: ['', Validators.required],
+      password: ['', Validators.required],      
+      nombreUsuario: ['', Validators.required],
+      cargo: ['', Validators.required],
+      telefono: ['', Validators.required],
+      correoElectronico: ['', Validators.required],
+      rolID: ['', Validators.required],
+    });
+    
+    this.loginForm.get('correoElectronico')?.setValidators([Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]);
+    this.loginForm.get('correoElectronico')?.updateValueAndValidity();
+    
+   }
 
   ngOnInit(): void {
 
-    
-    // Clone the original user data to avoid modifying the original user object directly
-    this.user = { ...this.data };
+   
     
     console.log('el usuario del dialogo', this.user.id);
     this.buscarUser(this.data.id);

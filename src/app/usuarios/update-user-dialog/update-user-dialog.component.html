@@ -30,19 +30,19 @@
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>Teléfono</mat-label>
-            <input matInput name="telefono"  formControlName="telefono" [(ngModel)]="usuario.Telefono">
+            <input matInput name="telefono"   type="number" pattern="[0-9]{10}" formControlName="telefono" [(ngModel)]="usuario.Telefono" appNumericOnly  maxlength="10" >
         </mat-form-field>
     </div>
     <div class="row">
-        <mat-form-field class="full-width">
+        <mat-form-field matTooltip="Formato: correo@example.com" class="full-width">
             <mat-label>Correo Electronico</mat-label>
-            <input matInput name="correoElectronico"  formControlName="correoElectronico" [(ngModel)]="usuario.CorreoElectronico">
+            <input matInput name="correoElectronico"  placeholder="correo@example.com" formControlName="correoElectronico" [(ngModel)]="usuario.CorreoElectronico" >
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>RolID</mat-label>
-            <input matInput name="rolID"  formControlName="rolID" [(ngModel)]="usuario.RolID">
+            <input matInput name="rolID" type="number"  formControlName="rolID" [(ngModel)]="usuario.RolID">
         </mat-form-field>
     </div>
     <div mat-dialog-actions class="centered-button">

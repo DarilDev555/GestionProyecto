@@ -25,7 +25,7 @@
         buscarProducto
         (click)="buscarUsuarioT(); limpiarInput()"
       >
-        <mat-icon mat-icon-lg id="icon">search</mat-icon>
+        <mat-icon mat-icon-lg class="icon">search</mat-icon>
       </button>
     </form>
 
@@ -37,10 +37,10 @@
           type="button"
           (click)="actualizarTabla()"
         >
-          <mat-icon class="iconUp">update</mat-icon>
+          <mat-icon class="icon">update</mat-icon>
         </button>
         <button mat-button matTooltip="Agregar Usuario" class="BtnAgregar" type="button" (click)="openCreateDialog()">
-          <mat-icon class="iconUp" >add_box</mat-icon>
+          <mat-icon class="icon" >add_box</mat-icon>
         </button>
       </div>
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -48,47 +48,47 @@
 
         <!-- ID Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>ID</th>
-          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+          <th mat-header-cell *matHeaderCellDef class="tituloTab">ID</th>
+          <td mat-cell *matCellDef="let element" class="contTab">{{ element.id }}</td>
         </ng-container>
 
         <!-- Nombre Column -->
         <ng-container matColumnDef="nombre">
-          <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+          <th mat-header-cell *matHeaderCellDef class="tituloTab">Nombre</th>
+          <td mat-cell *matCellDef="let element" class="contTab">{{ element.nombre }}</td>
         </ng-container>
 
         <!-- Nombre Usuario Column -->
         <ng-container matColumnDef="nombreUser">
-          <th mat-header-cell *matHeaderCellDef>Nombre Usuario</th>
-          <td mat-cell *matCellDef="let element">{{ element.nombreUser }}</td>
+          <th mat-header-cell *matHeaderCellDef class="tituloTab">Nombre Usuario</th>
+          <td mat-cell *matCellDef="let element" class="contTab">{{ element.nombreUser }}</td>
         </ng-container>
 
         <!-- Rol Column -->
         <ng-container matColumnDef="rol">
-          <th mat-header-cell *matHeaderCellDef>Rol</th>
-          <td mat-cell *matCellDef="let element">{{ element.rol }}</td>
+          <th mat-header-cell *matHeaderCellDef class="tituloTab">Rol</th>
+          <td mat-cell *matCellDef="let element" class="contTab">{{ element.rol }}</td>
         </ng-container>
         <!-- Telefono Column -->
         <ng-container matColumnDef="telefono">
-          <th mat-header-cell *matHeaderCellDef>Teléfono</th>
-          <td mat-cell *matCellDef="let element">{{ element.telefono }}</td>
+          <th mat-header-cell *matHeaderCellDef class="tituloTab">Teléfono</th>
+          <td mat-cell *matCellDef="let element" class="contTab">{{ element.telefono }}</td>
         </ng-container>
         <!-- Correo Column -->
         <ng-container matColumnDef="correo">
-          <th mat-header-cell *matHeaderCellDef>Correo</th>
-          <td mat-cell *matCellDef="let element">{{ element.correo }}</td>
+          <th mat-header-cell *matHeaderCellDef class="tituloTab">Correo</th>
+          <td mat-cell *matCellDef="let element" class="contTab">{{ element.correo }}</td>
         </ng-container>
 
         <!-- Acción Column -->
         <ng-container matColumnDef="accion">
-          <th mat-header-cell *matHeaderCellDef>Acción</th>
+          <th mat-header-cell *matHeaderCellDef class="tituloTab">Acción</th>
           <td mat-cell *matCellDef="let element; let i = index">
             <button mat-button matTooltip="Actualizar Usuario" class="btnActualizar" (click)="openUpdateDialog(element)">
-              <mat-icon mat-icon-lg class="addToCard"> edit </mat-icon>
+              <mat-icon mat-icon-lg class="icon"> edit </mat-icon>
             </button>
             <button mat-button matTooltip="Eliminar Usuario" class="btnEliminar" (click)="deleteUser(element.id)">
-                <mat-icon mat-icon-lg class="addToCard"> delete </mat-icon>
+                <mat-icon mat-icon-lg class="icon"> delete </mat-icon>
               </button>
           </td>
         </ng-container>

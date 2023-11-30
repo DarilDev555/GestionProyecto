@@ -57,10 +57,20 @@
 </mat-dialog-content>
 <div>
   <h1 class="etiquetaTotal">Total:  ${{ total }}</h1>
+  
+</div>
+<div>
+  <form class="formBuscador">
+    <mat-form-field class="buscador">
+      <mat-label>Buscar</mat-label>
+      <input matInput placeholder="Cantidad" id="cantidadInput" (input)="calcularCambio($event)"/>
+    </mat-form-field>
+  </form>
+  <h1 class="etiquetaCambio">Cambio: ${{ cambio }}</h1>
 </div>
 
 
 <mat-dialog-actions style="justify-content: flex-end;" >
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="cancelarCompra()">Cancel</button>
   <button mat-button  (click)="comprar()"[mat-dialog-close]="true" >Comprar</button>
 </mat-dialog-actions>

@@ -92,8 +92,19 @@ export class DashboardComponent {
         if (productoExistente) {
           // Si el producto ya existe, aumentar la cantidad y actualizar el total
           productoExistente.cantidad += cantidad; // Asegurando que cantidad sea un número
-          productoExistente.total =
-            productoExistente.cantidad * productoExistente.precio;
+          productoExistente.total = productoExistente.cantidad * productoExistente.precio;
+          
+          //descontar stock 
+          const index = this.productosTotales.findIndex(
+            (producto) => producto.id === id
+          );
+          if (index !== -1) {
+            this.productosTotales[index].stock -= cantidad;
+            console.log('producto:', this.productosTotales[index])
+            this.modificarProducto(id, this.productosTotales[index].stock);
+
+          }
+
         } else {
           // Si el producto no existe en el carrito, agrégalo a la lista
           const producto: Producto = {
@@ -126,12 +137,11 @@ export class DashboardComponent {
       data: { productos: this.productos },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-
-      // Actualiza la lista de productos en DashboardComponent
+    dialogRef.afterClosed().subscribe((result: Producto[] | undefined) => {
       if (result) {
-        this.productos = [];
+        console.log('Lista de productos después de cancelar:', result);
+      } else {
+        console.log('Compra cancelada');
       }
     });
   }
@@ -189,13 +199,11 @@ export class DashboardComponent {
 
     // Actualiza dataSource para reflejar los cambios
     this.dataSource = newElementData;
-    console.log('elementdata:', ELEMENT_DATA);
-    console.log('datasource:', this.dataSource);
   }
 
   actualizarTabla() {
-    console.log('Lista de productos de ELEMENT_DATA', ELEMENT_DATA);
-    this.dataSource = ELEMENT_DATA;
+
+    this.dataSource = this.productosTotales;
   }
 
   limpiarInput() {
@@ -243,15 +251,12 @@ export class DashboardComponent {
   }
 
   onPageChange(event: any) {
-    
-
     if (event.pageSize == undefined) {
       console.log('item por pag seleccionada', event.pageSize);
       this.itemsPerPage = 5;
-    }else{
+    } else {
       this.itemsPerPage = event.pageSize;
     }
-    
 
     this.currentPage = event.pageIndex + 1;
 
@@ -265,5 +270,17 @@ export class DashboardComponent {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     return this.productosTotales.slice(startIndex, endIndex);
+  }
+
+  modificarProducto(id: number, nuevoStock: number): void {
+    const index = ELEMENT_DATA.findIndex((producto) => producto.id === id);
+  
+    if (index !== -1) {
+      // Modificar el atributo específico (en este caso, el stock)
+      ELEMENT_DATA[index].stock = nuevoStock;
+      console.log(`Producto con ID ${id} modificado. Nuevo stock: ${nuevoStock}`);
+    } else {
+      console.log(`Producto con ID ${id} no encontrado.`);
+    }
   }
 }

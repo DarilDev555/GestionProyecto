@@ -28,21 +28,22 @@
         </mat-form-field>
     </div>
     <div class="row">
-        <mat-form-field class="full-width">
-            <mat-label>Teléfono</mat-label>
-            <input matInput name="telefono"  formControlName="telefono" [(ngModel)]="user.Telefono" >
+        <mat-form-field matTooltip="Formato 10 digitos" class="full-width">
+            <mat-label >Teléfono</mat-label>
+            <input matInput name="telefono"   type="number" pattern="[0-9]{10}" formControlName="telefono" [(ngModel)]="user.Telefono" appNumericOnly  maxlength="10" >
         </mat-form-field>
     </div>
     <div class="row">
-        <mat-form-field class="full-width">
-            <mat-label>Correo Electronico</mat-label>
-            <input matInput name="correoElectronico"  formControlName="correoElectronico" [(ngModel)]="user.CorreoElectronico" >
+        <mat-form-field matTooltip="Formato: correo@example.com" class="full-width">
+            <mat-label >Correo Electronico</mat-label>
+            <input matInput name="correoElectronico"  placeholder="correo@example.com" formControlName="correoElectronico" [(ngModel)]="user.CorreoElectronico" >
+    
         </mat-form-field>
     </div>
     <div class="row">
         <mat-form-field class="full-width">
             <mat-label>RolID</mat-label>
-            <input matInput name="rolID"  formControlName="rolID" [(ngModel)]="user.RolID">
+            <input type="number" matInput name="rolID"  formControlName="rolID" [(ngModel)]="user.RolID">
         </mat-form-field>
     </div>
     <div mat-dialog-actions class="centered-button">

@@ -7,8 +7,9 @@
   >
     <mat-icon>menu</mat-icon>
   </button>
+  <span class="LabelNombre">Sistema de Gestión de la verduleria "La Floresta"</span>
+  
 
-  <span>Verduleria la floresta</span>
   <span class="example-spacer"></span>
   <span class="example-fill-remaining-space"></span>
   <div class="user-container">
@@ -40,23 +41,23 @@
     </div>
 
     <div class="button-container">
-      <button mat-button (click)="toHome()">
-        <mat-icon>home</mat-icon>
+      <button mat-button class="icon" (click)="toHome()">
+        <mat-icon  >home</mat-icon>
         Home
       </button>
-      <button mat-button (click)="goToUsuarios()">
+      <button mat-button class="icon" (click)="goToUsuarios()">
         <mat-icon>account_circle</mat-icon>
         Usuarios
       </button>
-      <button mat-button (click)="goToProveedores()">
+      <button mat-button class="icon" (click)="goToProveedores()">
         <mat-icon>perm_contact_calendar</mat-icon>
-        Proveedor CRUD
+        Proveedor 
       </button>
-      <button mat-button (click)="toggleDrawer()">
+      <button mat-button class="icon" (click)="toggleDrawer()">
         <mat-icon>account_box</mat-icon>
-        Producto CRUD
+        Producto 
       </button>
-      <button mat-button (click)="toLogin()">
+      <button mat-button class="icon" (click)="toLogin()">
         <mat-icon>exit_to_app</mat-icon>
         Salir
       </button>

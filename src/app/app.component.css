@@ -124,3 +124,17 @@ height: 40px;
 .example-card {
 max-width: 400px;
 }
+
+.LabelNombre{
+  font-size:x-large;
+  color:#fff;
+}
+
+.icon{
+  font-size: x-large;
+  width: 100%;
+}
+
+.button-container{
+  width: 100%;
+}

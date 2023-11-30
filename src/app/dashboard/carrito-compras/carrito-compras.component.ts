@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Producto } from '../../modelos/producto';
 import { ConfirmacionVDialogComponent } from '../confirmacion-v-dialog/confirmacion-v-dialog.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 export interface PeriodicElement {
   nombre: string;
@@ -29,8 +30,12 @@ export class CarritoComprasComponent {
 
   total :number = 0;
 
+  cambio = this.total;
+
+
   constructor(
     public dialog: MatDialog,
+    private dialogRef: MatDialogRef<CarritoComprasComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { productos: Producto[] }
   ) {
     this.dataSourceEmpty = [...this.dataSource];
@@ -108,5 +113,20 @@ export class CarritoComprasComponent {
     console.log('ticket:',this.productos);
     console.log('Total:',this.total);
   }
+
+  calcularCambio(event: any) {
+    const cantidad = event?.target?.value;
+    if (!isNaN(cantidad)) {
+      this.cambio = cantidad - this.total ;
+    } else {
+      this.cambio = this.total;
+    }
+  }
+  cancelarCompra() {
+    // Cierra el diálogo con la lista de productos
+    this.dialogRef.close(this.productos);
+  }
+  
+ 
 
 }

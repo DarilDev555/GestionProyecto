@@ -214,6 +214,7 @@ export class ProveedorComponent {
             
             console.log('Solicitud a enviar:', JSON.stringify(result));
             // Resto del código
+            this.actualizar();
         },
         (error) => {
           console.log('Proveedor a agregar:', result);
