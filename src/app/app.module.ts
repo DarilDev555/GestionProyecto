@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -30,15 +29,14 @@ import { CreatUserDialogComponent } from './usuarios/creat-user-dialog/creat-use
 import { UpdateUserDialogComponent } from './usuarios/update-user-dialog/update-user-dialog.component';
 import { ProveedorAgregarComponent } from './proveedor/proveedor-agregar/proveedor-agregar.component';
 import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor-editar.component';
+import{ ProductosComponentComponent} from './productos/productos-component/productos-component.component'
 
-import { ProductosComponentModule } from './productos/productos.module';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,  
-
     DashboardComponent,
     CarritoComprasComponent,
     ProveedorComponent,
@@ -49,6 +47,7 @@ import { ProductosComponentModule } from './productos/productos.module';
     UpdateUserDialogComponent,
     ProveedorAgregarComponent, 
     ProveedorEditarComponent,
+    ProductosComponentComponent,
 
   ],
   imports: [
@@ -71,8 +70,7 @@ import { ProductosComponentModule } from './productos/productos.module';
     AppRoutingModule,
     MatTooltipModule,
     MatPaginatorModule,
-    FormsModule,
-    ProductosComponentModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

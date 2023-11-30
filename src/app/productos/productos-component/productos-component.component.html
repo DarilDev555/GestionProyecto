@@ -1,19 +1,24 @@
+<body>
 <form class="formBuscador">
     <mat-form-field class="buscador">
       <mat-label>Buscar</mat-label>
       <input matInput placeholder="Código, Nombre" [(ngModel)]="buscarTexto" #searchInput name="buscarTexto" />
     </mat-form-field>
   
-    <button mat-icon-button class="btnBuscar" matTooltip="Buscar Producto" type="button" produtoBuscar (click)="productoBuscar(); limpiarInput()">
+    <button mat-button class="btnBuscar" matTooltip="Buscar Producto" type="button" produtoBuscar (click)="productoBuscar(); limpiarInput()">
       <mat-icon>search</mat-icon>
     </button>
   
-    <button mat-icon-button class="btnAgregarProducto" (click)="openModal();">
-      <mat-icon>add_circle</mat-icon>
-    </button>
+   
   </form>
+
   
   <div class="table">
+    <div class="actTabla">
+      <button mat-button class="btnAgregarProducto" matTooltip="Agregar Producto" (click)="openModal();">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </div>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
       <!-- ID Column -->
@@ -45,6 +50,12 @@
         <th mat-header-cell *matHeaderCellDef>Descripción</th>
         <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
       </ng-container>
+
+       <!-- FechaCaducidad Column -->
+       <ng-container matColumnDef="fechaCaducidad">
+        <th mat-header-cell *matHeaderCellDef>Fecha Caducidad</th>
+        <td mat-cell *matCellDef="let element">{{ element.fechaCaducidad }}</td>
+      </ng-container>
   
       <!-- Acción Column -->
       <ng-container matColumnDef="accion">
@@ -75,4 +86,4 @@
       class="pag"
     ></mat-paginator>
   </div>
-  
+</body>

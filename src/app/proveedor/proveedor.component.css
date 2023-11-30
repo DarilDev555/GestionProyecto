@@ -4,6 +4,10 @@
   height: 100vh;
   overflow: hidden; 
 }
+body {
+  height: 90.2vh;
+}
+
 
 .mat-toolbar {
   background-color: #336420;
