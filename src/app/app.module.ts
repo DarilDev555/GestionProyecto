@@ -24,15 +24,14 @@ import { FormsModule, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreatUserDialogComponent } from './usuarios/creat-user-dialog/creat-user-dialog.component';
 import { UpdateUserDialogComponent } from './usuarios/update-user-dialog/update-user-dialog.component';
-
 import { ProveedorAgregarComponent } from './proveedor/proveedor-agregar/proveedor-agregar.component';
 import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor-editar.component';
 
+import { ProductosComponentModule } from './productos/productos.module';
 
 
 
@@ -73,6 +72,7 @@ import { ProveedorEditarComponent } from './proveedor/proveedor-editar/proveedor
     MatTooltipModule,
     MatPaginatorModule,
     FormsModule,
+    ProductosComponentModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

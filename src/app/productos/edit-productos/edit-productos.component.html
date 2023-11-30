@@ -1,0 +1,24 @@
+<h2 class="titulo">Editar Producto</h2>
+<form class="two-column-form">
+  <div class="column">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre"  name="nombre" required>
+
+    <label for="preio">Precio</label>
+    <input id="precio"  name="precio" required>
+  </div>
+
+  <div class="column">
+    <label for="stock">stock:</label>
+    <input id="stock"  name="stock" required>
+    
+    <label for="fechaCaducidad">Fecha de Caducidad:</label>
+    <input id="fechaCaducidad" name="fechaCaducidad" type="date" required>
+
+
+  </div>
+
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button cdkFocusInitial>Editar</button>
+</form>
+

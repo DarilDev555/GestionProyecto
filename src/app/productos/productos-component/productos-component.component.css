@@ -1,0 +1,58 @@
+/* Estilo para la tabla */
+.table {
+    overflow-x: auto;
+  }
+  
+  mat-table {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    display: block;
+    border-collapse: collapse; /* Agregar para que las celdas se colapsen correctamente */
+  }
+  
+  /* Estilo para el encabezado de la tabla */
+  .mat-header-cell {
+    background-color: #f5f5f5; /* Fondo gris claro */
+    color: #333; /* Texto oscuro */
+    font-weight: bold; /* Texto en negrita */
+    border-bottom: 2px solid #ddd; /* Borde inferior gris claro */
+    text-align: left; /* Alineación del texto a la izquierda */
+    padding: 12px; /* Espaciado interno */
+  }
+  
+  /* Estilo para las celdas de la tabla */
+  .mat-cell {
+    border-bottom: 1px solid #eee; /* Borde inferior gris más claro */
+    padding: 12px; /* Espaciado interno */
+  }
+  
+  /* Estilo para filas alternas (opcional) */
+  .mat-row:nth-child(even) {
+    background-color: #f9f9f9; /* Fondo gris claro para filas pares */
+  }
+  
+  /* Estilo para botones de acción en celdas */
+  .btnDeleteProducto,
+  .btnEditProducto {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  /* Estilo para el paginador */
+  .paginator {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Estilo general */
+  body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
