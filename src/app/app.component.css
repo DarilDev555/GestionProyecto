@@ -130,11 +130,15 @@ max-width: 400px;
   color:#fff;
 }
 
+
+
+
+
 .icon{
   font-size: x-large;
-  width: 100%;
+ 
+  margin-left: 0%;
 }
-
-.button-container{
-  width: 100%;
+.iconHome{
+  margin-left: 0%;
 }
