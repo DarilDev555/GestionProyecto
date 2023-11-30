@@ -38,9 +38,9 @@ body {
 
 .btnAddCarrito {
   background-color: #3498db;
-  padding: 5%;
-  padding-left: 14%;
-  padding-top: 11%;
+
+  padding-left: 12%;
+  padding-top: 8%;
   border-radius: 10%;
   cursor: pointer;
   height: 50px;
