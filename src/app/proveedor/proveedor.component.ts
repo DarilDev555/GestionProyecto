@@ -124,6 +124,12 @@ export class ProveedorComponent {
       (data) => {
         this.dataSource = data;
         this.totalItems = data.length;
+        this.proveedoresTotales = data;
+        this.dataSource = this.proveedoresTotales.slice(0, this.itemsPerPage);
+        this.totalItems = this.proveedoresTotales.length;
+          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+
+          this.onPageChange({ pageIndex: this.currentPage - 1 });
       },
       (error) => {
         console.error('Error al obtener proveedores desde la API:', error);
@@ -138,9 +144,6 @@ export class ProveedorComponent {
   toLogin() {
     this.router.navigate(['']);
   }
-
-  resetCantidadInput() {
-  } 
 
   proveedorBuscar() {    
     const buscarTexto = this.buscarTexto.trim(); // Elimina espacios en blanco alrededor
@@ -201,7 +204,7 @@ export class ProveedorComponent {
       height: '50vh',
       data: {
         ProveedorID: 0,
-        Nombre: 'nada',
+        Nombre: '',
         Direccion: '',
         Telefono: '',
         CorreoElectronico: ''

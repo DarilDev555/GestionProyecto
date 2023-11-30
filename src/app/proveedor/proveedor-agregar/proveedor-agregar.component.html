@@ -1,5 +1,5 @@
 <h2>Agregar Proveedor</h2>
-<form class="two-column-form">
+<form class="two-column-form" #form="ngForm">
   <div class="column">
     <label for="nombre">Nombre:</label>
     <input id="nombre" [(ngModel)]="data.Nombre" name="nombre" placeholder="Nombre" required>
@@ -10,12 +10,24 @@
 
   <div class="column">
     <label for="telefono">Teléfono:</label>
-    <input id="telefono" [(ngModel)]="data.Telefono" name="telefono" required>
+    <input id="telefono" [(ngModel)]="data.Telefono" name="telefono" pattern="[0-9]{10}" title="El teléfono debe tener 10 dígitos" required>
 
     <label for="correoElectronico">Correo Electrónico:</label>
-    <input id="correoElectronico" [(ngModel)]="data.CorreoElectronico" name="CorreoElectronico" required>
+    <input id="correoElectronico" [(ngModel)]="data.CorreoElectronico" name="CorreoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Ingrese un correo electrónico válido" required>
+  </div>
+
+  <!-- Agrega mensajes de error -->
+  <div *ngIf="form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)">
+    <div *ngIf="form.controls['telefono'].hasError('required')">El teléfono es requerido.</div>
+    <div *ngIf="form.controls['telefono'].hasError('pattern')">Ingrese un teléfono válido.</div>
+  </div>
+  
+  <!-- Mensajes de error para el campo de correo electrónico -->
+  <div *ngIf="form.controls['CorreoElectronico'].invalid && (form.controls['CorreoElectronico'].dirty || form.controls['CorreoElectronico'].touched)">
+    <div *ngIf="form.controls['CorreoElectronico'].hasError('required')">El correo electrónico es requerido.</div>
+    <div *ngIf="form.controls['CorreoElectronico'].hasError('pattern')">Ingrese un correo electrónico válido.</div>
   </div>
 
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Agregar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="form.invalid">Agregar</button>
 </form>
