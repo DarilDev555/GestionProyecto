@@ -32,7 +32,7 @@ export class productosService {
   }
 
   editarProductos(id: number, productos: Productos): Observable<Productos> {
-    const url = '${this.apiUrl}${id}/';
+    const url = `${this.apiUrl}${id}/`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'X-CSRFToken': 'tu-token-csrf-aqui',

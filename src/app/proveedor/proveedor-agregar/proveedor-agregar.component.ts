@@ -18,7 +18,13 @@ export class ProveedorAgregarComponent {
   
   constructor(
     public dialogRef: MatDialogRef<ProveedorAgregarComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ProveedorBD
+    @Inject(MAT_DIALOG_DATA) public data: ProveedorBD= {
+      ProveedorID: 0,
+      Nombre: "",
+      Direccion: "",
+      Telefono: "",
+      CorreoElectronico:""  // Establecerá la FechaCaducidad en la fecha y hora actuales al iniciar el formulario
+    }
   ) {}
 
   onNoClick(): void {

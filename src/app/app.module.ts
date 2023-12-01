@@ -51,6 +51,7 @@ import { AgregarProductoComponent } from './productos/agregar-producto/agregar-p
     ProveedorEditarComponent,
     ProductosComponentComponent,
     AgregarProductoComponent,
+    EditProductosComponent,
   ],
   imports: [
     BrowserModule,
