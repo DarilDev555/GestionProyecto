@@ -1,10 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import {
-  MatDialog,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-  MatDialogModule,
-} from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule,} from '@angular/material/dialog';
+import { ProductoAC } from 'src/app/modelos/productoAc';
 
 export interface DialogData {
   codigo: string;
@@ -31,7 +27,7 @@ export class ConfirmacionVDialogComponent {
     const contraseñaDeseada = '123'; // Reemplaza con tu contraseña deseada
 
     if (this.inputCode === contraseñaDeseada) {
-      console.log('true');
+      console.log('data');
       this.dialogRef.close(true); // Contraseña correcta, devuelve true
     } else {
       console.log('false');
@@ -39,6 +35,8 @@ export class ConfirmacionVDialogComponent {
     }
   }
 
+  
+  
 
 
 }

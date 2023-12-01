@@ -253,7 +253,6 @@ export class DashboardComponent {
 
   onPageChange(event: any) {
     if (event.pageSize == undefined) {
-      console.log('item por pag seleccionada', event.pageSize);
       this.itemsPerPage = 5;
     } else {
       this.itemsPerPage = event.pageSize;

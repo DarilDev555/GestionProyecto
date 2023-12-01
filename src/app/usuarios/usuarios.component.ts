@@ -239,8 +239,7 @@ export class UsuariosComponent {
     };
 
     console.log('url:', apiUrl, 'user:', updatedUserData);
-    this.http.put(apiUrl, updatedUserData).subscribe(
-      () => {
+    this.http.put(apiUrl, updatedUserData).subscribe(() => {
         // Update success logic
         console.log('User updated successfully.');
       },
