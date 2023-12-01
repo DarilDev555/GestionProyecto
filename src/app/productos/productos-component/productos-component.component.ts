@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Productos } from 'src/app/modelos/productos';
+import {ProductoAC} from '../../modelos/productoAc'
 import { EditProductosComponent } from '../edit-productos/edit-productos.component';
 import { AgregarProductoComponent } from '../agregar-producto/agregar-producto.component';
 
@@ -79,6 +80,8 @@ export class ProductosComponentComponent {
   ];
 
   productosTotales: Productos[] = [];
+  productosCercaDeCaducar: Productos[] = [];
+  productosParaComprar: Productos[] = [];
   productosSelect: Productos[] = [];
   dataSource = this.productosTotales;
   isDrawerOpened = false;
@@ -120,9 +123,9 @@ export class ProductosComponentComponent {
         this.productosTotales = data;
         this.dataSource = this.productosTotales.slice(0, this.itemsPerPage);
         this.totalItems = this.productosTotales.length;
-          this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
+        this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
 
-          this.onPageChange({ pageIndex: this.currentPage - 1 });
+        this.onPageChange({ pageIndex: this.currentPage - 1 });
       },
       (error) => {
         console.error('Error al obtener proveedores desde la API:', error);
@@ -254,7 +257,6 @@ export class ProductosComponentComponent {
 
   onPageChange(event: any) {
     if (event.pageSize == undefined) {
-      console.log('item por pag seleccionada', event.pageSize);
       this.itemsPerPage = 5;
     } else {
       this.itemsPerPage = event.pageSize;
@@ -291,15 +293,110 @@ export class ProductosComponentComponent {
           }
           this.totalItems = this.productosTotales.length;
           this.totalPages = Math.ceil(this.totalItems / this.itemsPerPage);
-
-          console.log('Lista de productos de la api', this.productosTotales);
           this.onPageChange({ pageIndex: this.currentPage - 1 });
+          this.verificarCaducidad();
+          this.realizarCompraProductosEscasos();
         },
         (error) => {
           console.error('Error fetching data from the API:', error);
         }
       );
   }
+  verificarCaducidad() {
+    const fechaActual = new Date();
 
-  
+    let productosCercaDeCaducarNombres = []; 
+
+    for (const producto of this.productosTotales) {
+      const fechaCaducidad = new Date(producto.fechaCaducidad);
+
+      const diferenciaMilisegundos = fechaCaducidad.getTime() - fechaActual.getTime();
+      const diferenciaDias = 2 + Math.floor(diferenciaMilisegundos / (1000 * 60 * 60 * 24));
+
+
+      if (diferenciaDias > 0 && diferenciaDias <= 3) {
+        productosCercaDeCaducarNombres.push(
+          `El producto ${producto.nombre} caduca en ${diferenciaDias} días.`);
+      } else if (diferenciaDias === 0) {
+        productosCercaDeCaducarNombres.push(`El producto ${producto.nombre} caduca  hoy.`);
+      } else if (diferenciaDias < 0) {
+        productosCercaDeCaducarNombres.push(`El producto ${producto.nombre} ha caducado.` );
+      }
+
+      if (diferenciaDias <= 3) {
+        this.productosCercaDeCaducar.push(producto);
+      }
+    }
+
+    // Mostrar alerta con los nombres de productos cercanos a caducar
+    if (productosCercaDeCaducarNombres.length > 0) {
+      const mensajeAlerta = 'Productos Cerca de caducar:\n' +   productosCercaDeCaducarNombres.join('\n');
+      window.alert(mensajeAlerta);
+    }
+  }
+
+  realizarCompraProductosEscasos(){
+    let productosAReponer = []; 
+
+
+    for (const producto of this.productosTotales) {
+      if(producto.stock<5){
+        this.productosParaComprar.push(producto);
+        productosAReponer.push(`El producto ${producto.nombre} tiene ${producto.stock} piezas en stock.` );
+      }
+
+    }
+
+    if (productosAReponer.length > 0) {
+      const mensajeAlerta = 'Productos Con stock bajo:\n' +   productosAReponer.join('\n') + '\nSe realizara la compra de producto automatico';
+      window.alert(mensajeAlerta);
+    }
+
+    for (const producto of this.productosParaComprar) {
+
+     this.realizarPedido(producto.id,15);
+
+    }
+  }
+
+  realizarPedido(productoId: number, cantidadAgregada: number){
+
+
+ 
+    const producto = this.productosTotales.find((p) => p.id === productoId);
+
+    if (!producto) {
+      console.error(`No se encontró un producto con ID ${productoId}`);
+      return;
+    }
+    const pro: ProductoAC = {
+      ProductoID: producto.id,
+      Nombre: producto.nombre,
+      Descripcion: producto.descripcion,
+      Precio: producto.precio,
+      Stock: producto.stock + cantidadAgregada ,
+      FechaCaducidad: producto.fechaCaducidad,
+    };
+    const apiUrl = `http://127.0.0.1:8000/api/ProductosComplete/${producto.id}/`;
+
+    if (producto) {
+      // Modificar el stock
+      producto.stock += cantidadAgregada;
+    
+      console.log(apiUrl,pro)
+      // Actualizar la información en la API
+      this.http.put(apiUrl, pro).subscribe(() => {
+            console.log('Stock modificado exitosamente:');
+          },
+          (error) => {
+            console.error('Error al modificar el stock en la API:', error);
+            // Si hay un error al actualizar en la API, revertir los cambios locales
+            producto.stock -= cantidadAgregada;
+          }
+        );
+    } else {
+      console.error('Producto no encontrado');
+    }
+
+  }
 }
