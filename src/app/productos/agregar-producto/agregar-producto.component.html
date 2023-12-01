@@ -2,21 +2,21 @@
 <form class="two-column-form">
   <div class="column">
     <label for="nombre">Nombre:</label>
-    <input id="nombre" [(ngModel)]="data.nombre" name="nombre" required>
+    <input id="nombre" [(ngModel)]="data.Nombre" name="nombre" required>
 
     <label for="descripcion">Descripción:</label>
-    <input id="descripcion" [(ngModel)]="data.descripcion" name="descripcion" required>
+    <input id="descripcion" [(ngModel)]="data.Descripcion" name="descripcion" required>
   </div>
 
   <div class="column">
     <label for="precio">Precio:</label>
-    <input id="precio" [(ngModel)]="data.precio" name="precio" type="number" required min="0">
+    <input id="precio" [(ngModel)]="data.Precio" name="precio" type="number" required min="0">
 
     <label for="stock">Stock:</label>
-    <input id="stock" [(ngModel)]="data.stock" name="stock" type="number" required min="0">
+    <input id="stock" [(ngModel)]="data.Stock" name="stock" type="number" required min="0">
 
     <label for="fechaCaducidad">Fecha de Caducidad:</label>
-    <input id="fechaCaducidad" [(ngModel)]="data.fechaCaducidad" name="fechaCaducidad" type="date" required>
+    <input id="fechaCaducidad" [(ngModel)]="data.FechaCaducidad" name="fechaCaducidad" type="date" required>
   </div>
 
   <button mat-button type="button" (click)="onNoClick()">Cancelar</button>
