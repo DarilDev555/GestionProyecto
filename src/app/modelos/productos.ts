@@ -1,10 +1,10 @@
 export interface Productos{
 
-    id: number;
-    nombre: string;
-    descripcion: string;
-    precio: number;
-    stock: number;
-    fechaCaducidad: Date;
+    ProductoID: number;
+    Nombre: string;
+    Descripcion: string;
+    Precio: number;
+    Stock: number;
+    FechaCaducidad: Date;
 
 }

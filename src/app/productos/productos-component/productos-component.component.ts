@@ -33,7 +33,7 @@ export class productosService {
   }
 
   editarProductos(id: number, productos: Productos): Observable<Productos> {
-    const url = '${this.apiUrl}${id}/';
+    const url = `${this.apiUrl}${id}/`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'X-CSRFToken': 'tu-token-csrf-aqui',
@@ -53,12 +53,12 @@ export class productosService {
 }
 
 export interface PeriodicElement {
-  id: number;
-  nombre: string; // Cambiar 'String' a 'string'
-  descripcion: string;
-  stock: number;
-  precio: number;
-  fechaCaducidad: Date;
+  ProductoID: number;
+  Nombre: string; // Cambiar 'String' a 'string'
+  Descripcion: string;
+  Stock: number;
+  Precio: number;
+  FechaCaducidad: Date;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [];
@@ -166,12 +166,12 @@ export class ProductosComponentComponent {
     // Crea una nueva matriz de un solo elemento con el producto
     const newElementData: PeriodicElement[] = [
       {
-        id: productos.id,
-        nombre: productos.nombre,
-        descripcion: productos.descripcion,
-        precio: productos.precio,
-        stock: productos.stock,
-        fechaCaducidad: productos.fechaCaducidad,
+        ProductoID: productos.ProductoID,
+        Nombre: productos.Nombre,
+        Descripcion: productos.Descripcion,
+        Precio: productos.Precio,
+        Stock: productos.Stock,
+        FechaCaducidad: productos.FechaCaducidad,
       },
     ];
     // Actualiza dataSource para reflejar los cambios
@@ -188,12 +188,12 @@ export class ProductosComponentComponent {
       width: '70vh',
       height: '50vh',
       data: {
-        id: 0,
-        nombre: '',
-        descripcion: '',
-        stock: 0,
-        precio: 0,
-        fechaCaducidad: new Date(),
+        ProductoID: 0,
+        Nombre: '',
+        Descripcion: '',
+        Stock: 0,
+        Precio: 0,
+        FechaCaducidad: new Date(),
       } as Productos,
     });
 
@@ -220,12 +220,12 @@ export class ProductosComponentComponent {
           width: '70vh',
           height: '50vh',
           data: {
-            id: productos.id,
-            nombre: productos.nombre,
-            descripcion: productos.descripcion,
-            precio: productos.precio,
-            stock: productos.stock,
-            fechaCaducidad: productos.fechaCaducidad,
+            ProductoID: productos.ProductoID,
+            Nombre: productos.Nombre,
+            Descripcion: productos.Descripcion,
+            Precio: productos.Precio,
+            Stock: productos.Stock,
+            FechaCaducidad: productos.FechaCaducidad,
           } as Productos,
         });
 
@@ -279,12 +279,12 @@ export class ProductosComponentComponent {
 
           for (const productDataFull of data) {
             const product: Productos = {
-              id: productDataFull.ProductoID,
-              nombre: productDataFull.Nombre,
-              descripcion: productDataFull.Descripcion,
-              precio: productDataFull.Precio,
-              stock: productDataFull.Stock,
-              fechaCaducidad: productDataFull.FechaCaducidad,
+              ProductoID: productDataFull.ProductoID,
+              Nombre: productDataFull.Nombre,
+              Descripcion: productDataFull.Descripcion,
+              Precio: productDataFull.Precio,
+              Stock: productDataFull.Stock,
+              FechaCaducidad: productDataFull.FechaCaducidad,
             };
 
             this.productosTotales.push(product);
