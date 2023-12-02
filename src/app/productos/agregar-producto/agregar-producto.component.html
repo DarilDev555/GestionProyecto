@@ -1,5 +1,5 @@
 <h2 class="titulo">Agregar producto</h2>
-<form class="two-column-form">
+<form class="two-column-form" #form="ngForm">
   <div class="column">
     <label for="nombre">Nombre:</label>
     <input id="nombre" [(ngModel)]="data.Nombre" name="nombre" required>
@@ -10,15 +10,23 @@
 
   <div class="column">
     <label for="precio">Precio:</label>
-    <input id="precio" [(ngModel)]="data.Precio" name="precio" type="number" required min="0">
+    <input id="precio" [(ngModel)]="data.Precio" name="precio" type="number" required min="1">
+    <div *ngIf="form.controls['precio']?.invalid && (form.controls['precio'].dirty || form.controls['precio'].touched)">
+      <div *ngIf="form.controls['precio'].hasError('required')">El precio es requerido.</div>
+      <div *ngIf="form.controls['precio'].hasError('min')">El precio debe ser mayor 0.</div>
+    </div>
 
     <label for="stock">Stock:</label>
-    <input id="stock" [(ngModel)]="data.Stock" name="stock" type="number" required min="0">
+    <input id="stock" [(ngModel)]="data.Stock" name="stock" type="number" required min="1">
+    <div *ngIf="form.controls['stock']?.invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)">
+      <div *ngIf="form.controls['stock'].hasError('required')">El stock es requerido.</div>
+      <div *ngIf="form.controls['stock'].hasError('min')">El stock debe ser mayor a 0.</div>
+    </div>
 
     <label for="fechaCaducidad">Fecha de Caducidad:</label>
     <input id="fechaCaducidad" [(ngModel)]="data.FechaCaducidad" name="fechaCaducidad" type="date" required>
   </div>
 
   <button mat-button type="button" (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" type="button" cdkFocusInitial>Agregar</button>
+  <button mat-button [mat-dialog-close]="data" type="button" cdkFocusInitial [disabled]="form.invalid">Agregar</button>
 </form>
