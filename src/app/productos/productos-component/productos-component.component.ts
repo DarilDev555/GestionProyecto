@@ -308,7 +308,7 @@ export class ProductosComponentComponent {
     let productosCercaDeCaducarNombres = []; 
 
     for (const producto of this.productosTotales) {
-      const fechaCaducidad = new Date(producto.fechaCaducidad);
+      const fechaCaducidad = new Date(producto.FechaCaducidad);
 
       const diferenciaMilisegundos = fechaCaducidad.getTime() - fechaActual.getTime();
       const diferenciaDias = 2 + Math.floor(diferenciaMilisegundos / (1000 * 60 * 60 * 24));
@@ -316,11 +316,11 @@ export class ProductosComponentComponent {
 
       if (diferenciaDias > 0 && diferenciaDias <= 3) {
         productosCercaDeCaducarNombres.push(
-          `El producto ${producto.nombre} caduca en ${diferenciaDias} días.`);
+          `El producto ${producto.Nombre} caduca en ${diferenciaDias} días.`);
       } else if (diferenciaDias === 0) {
-        productosCercaDeCaducarNombres.push(`El producto ${producto.nombre} caduca  hoy.`);
+        productosCercaDeCaducarNombres.push(`El producto ${producto.Nombre} caduca  hoy.`);
       } else if (diferenciaDias < 0) {
-        productosCercaDeCaducarNombres.push(`El producto ${producto.nombre} ha caducado.` );
+        productosCercaDeCaducarNombres.push(`El producto ${producto.Nombre} ha caducado.` );
       }
 
       if (diferenciaDias <= 3) {
@@ -340,9 +340,9 @@ export class ProductosComponentComponent {
 
 
     for (const producto of this.productosTotales) {
-      if(producto.stock<5){
+      if(producto.Stock<5){
         this.productosParaComprar.push(producto);
-        productosAReponer.push(`El producto ${producto.nombre} tiene ${producto.stock} piezas en stock.` );
+        productosAReponer.push(`El producto ${producto.Nombre} tiene ${producto.Stock} piezas en stock.` );
       }
 
     }
@@ -354,7 +354,7 @@ export class ProductosComponentComponent {
 
     for (const producto of this.productosParaComprar) {
 
-     this.realizarPedido(producto.id,15);
+     this.realizarPedido(producto.ProductoID,15);
 
     }
   }
@@ -363,25 +363,25 @@ export class ProductosComponentComponent {
 
 
  
-    const producto = this.productosTotales.find((p) => p.id === productoId);
+    const producto = this.productosTotales.find((p) => p.ProductoID === productoId);
 
     if (!producto) {
       console.error(`No se encontró un producto con ID ${productoId}`);
       return;
     }
     const pro: ProductoAC = {
-      ProductoID: producto.id,
-      Nombre: producto.nombre,
-      Descripcion: producto.descripcion,
-      Precio: producto.precio,
-      Stock: producto.stock + cantidadAgregada ,
-      FechaCaducidad: producto.fechaCaducidad,
+      ProductoID: producto.ProductoID,
+      Nombre: producto.Nombre,
+      Descripcion: producto.Descripcion,
+      Precio: producto.Precio,
+      Stock: producto.Stock + cantidadAgregada ,
+      FechaCaducidad: producto.FechaCaducidad,
     };
-    const apiUrl = `http://127.0.0.1:8000/api/ProductosComplete/${producto.id}/`;
+    const apiUrl = `http://127.0.0.1:8000/api/ProductosComplete/${producto.ProductoID}/`;
 
     if (producto) {
       // Modificar el stock
-      producto.stock += cantidadAgregada;
+      producto.Stock += cantidadAgregada;
     
       console.log(apiUrl,pro)
       // Actualizar la información en la API
@@ -391,7 +391,7 @@ export class ProductosComponentComponent {
           (error) => {
             console.error('Error al modificar el stock en la API:', error);
             // Si hay un error al actualizar en la API, revertir los cambios locales
-            producto.stock -= cantidadAgregada;
+            producto.Stock -= cantidadAgregada;
           }
         );
     } else {

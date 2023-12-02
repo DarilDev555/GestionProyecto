@@ -5,15 +5,15 @@
     <input id="nombre" [(ngModel)]="data.Nombre" name="nombre" placeholder="Nombre" required>
 
     <label for="direccion">Dirección:</label>
-    <input id="direccion" [(ngModel)]="data.Direccion" name="direccion" required>
+    <input id="direccion" [(ngModel)]="data.Direccion" name="direccion" placeholder="Direccion" required>
   </div>
 
   <div class="column">
     <label for="telefono">Teléfono:</label>
-    <input id="telefono" [(ngModel)]="data.Telefono" name="telefono" pattern="[0-9]{10}" title="El teléfono debe tener 10 dígitos" required>
+    <input id="telefono" [(ngModel)]="data.Telefono" name="telefono" placeholder="Telefono" pattern="[0-9]{10}" title="El teléfono debe tener 10 dígitos" required>
 
     <label for="correoElectronico">Correo Electrónico:</label>
-    <input id="correoElectronico" [(ngModel)]="data.CorreoElectronico" name="CorreoElectronico" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Ingrese un correo electrónico válido" required>
+    <input id="correoElectronico" [(ngModel)]="data.CorreoElectronico" name="CorreoElectronico" placeholder="Ejemplo@ejem.com" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Ingrese un correo electrónico válido" required>
   </div>
 
   <!-- Agrega mensajes de error -->
@@ -29,5 +29,5 @@
   </div>
 
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial [disabled]="form.invalid">Agregar</button>
+  <button mat-button [mat-dialog-close]="data"  [disabled]="form.invalid">Agregar</button>
 </form>
